@@ -335,6 +335,7 @@ display: block;
     .header-content__title h1 {
         font-size: 2.3rem;
         line-height: 3.5rem;
+        font-weight: bold;
     }
     .header-content__title {
         padding: 0 20px;
@@ -942,7 +943,7 @@ display: block;
     width: auto;
     height: auto;
     text-align: left;
-    font-size: 15px;
+    font-size: 17px;
     opacity: .7;
     background: none;
     flex-wrap: nowrap;
@@ -971,9 +972,9 @@ display: block;
 .swiper-pagination-bullet-active::before {
     content: '';
     position: absolute;
-    width: 15px;
-    border-bottom: solid 1px grey;
-    left: -25px;
+    width: 12px;
+    border-bottom: solid 2px grey;
+    left: -23px;
     top: 50%;
 }
 
@@ -1116,7 +1117,7 @@ display: block;
     }
 
     .swiper-buttons {
-        top: 250px;
+        top: 350px;
         padding: 0 20px;
         height: 80px;
         background-color: $color-standard2;
@@ -2139,7 +2140,13 @@ textarea.input2 + .focus-input2::after {
 .footer .txt-p {
     margin-bottom: 5px;
 }
-
+.footer .txt-p a{
+    text-decoration: none;
+    color: black;
+}
+.footer .txt-p a:hover{
+    color: $color-standard2
+}
 .social-media {
     width: 100%;
     height: 60px;
@@ -2257,6 +2264,7 @@ padding: 0 20px;
    .header-page .header-content__title h1 {
         font-size: 1.5rem;
         line-height: 2.2rem;
+        font-weight: bold;
     }
 }
 //pages - style ---------------------->//
