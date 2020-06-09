@@ -130,6 +130,7 @@ module.exports = {
           new CopyPlugin({
             patterns: [
               { from: 'src/images', to: 'images' },
+              { from: 'src/contact.php'},
               // { from: 'src/images/img/icons', to: 'images/icons' },
             ],
           }),
