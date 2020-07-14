@@ -3,13 +3,13 @@ import '../scss/style.scss';
 import {sliders} from './modules/sliders';
 import {navigation} from './modules/navigation';
 import {contact} from './modules/contact';
-
-// import "fortawesome/fontawesome-free/js/all.js";
+import {animations} from './modules/animate.js'
 
   document.addEventListener("DOMContentLoaded", () => {
     sliders();
     navigation();
     contact();
+    animations()
 });
 
 const navbarLinks=document.querySelectorAll('.nav a');

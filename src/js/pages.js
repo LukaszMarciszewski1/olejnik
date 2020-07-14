@@ -9,3 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     navigation();
     contact();
 });
+// AOS.init({
+//     duration: 1200,
+//   })

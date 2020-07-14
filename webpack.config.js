@@ -10,7 +10,6 @@ module.exports = {
     entry:{
      index: './src/js/index.js', 
      subpages: './src/js/pages.js',
-    //  calculator: './src/js/modules/calculator.js',
      calculateDp: './src/js/modules/calculate-dp.js',
      calculateLf: './src/js/modules/calculate-lf.js',
      calculateEs: './src/js/modules/calculate-es.js',
@@ -22,9 +21,7 @@ module.exports = {
     },
     module: {
         rules: [{
-            // test: /\.m?js$/,
                 test: /\.js$/,
-                // exclude: /(node_modules|bower_components)/,
                 use: {
                     loader: 'babel-loader',
                     options: {
@@ -32,7 +29,7 @@ module.exports = {
                     }
                 }
             },
-            // test: /\.s[ac]ss$/i,
+
             {
                 test: /\.(sass|scss)$/,
                 use: [
@@ -45,14 +42,6 @@ module.exports = {
                 test: /\.(svg|eot|woff|woff2|ttf)$/,
                 use: ['file-loader']
             },
-            // {
-            //     test: /\.(png|jpeg|gif|svg|jpg)$/,
-            //     loader: 'file-loader',
-            //     options:{
-            //         name: '[name][contenthash:6].[ext]',
-            //         outputPath:'images'
-            //     }
-            // },
             
             {
               test: /\.(jpg|png|svg|gif|jpeg)$/,
@@ -67,7 +56,7 @@ module.exports = {
                 loader: 'image-webpack-loader',
                 options: {
                   mozjpeg: {
-                    quality: 70,
+                    quality: 90,
                     progressive: true
                   }
                 }
@@ -130,8 +119,7 @@ module.exports = {
           new CopyPlugin({
             patterns: [
               { from: 'src/images', to: 'images' },
-              { from: 'src/contact.php'},
-              // { from: 'src/images/img/icons', to: 'images/icons' },
+              { from: 'src/contact.php'}
             ],
           }),
       ],

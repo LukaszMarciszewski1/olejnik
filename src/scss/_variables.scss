@@ -8,9 +8,10 @@ $padding-itemGallery:12px;
 $background-color:#f6f5f5;
 $color-standard: #1a7aa3;
 $color-green: #94c8d6;
-$color-green2: #75adbd;
-$color-standard: #669ead;
+$color-green2: #3b8296;
+$color-standard: #2a6879;
 $color-standard2: #6299aa;
+$color-standard2: #5096ac;
 $light-green:#fafafa;
 $background-color2:#d3dbee;
 $icons-bg: #eeedf2;
@@ -42,6 +43,7 @@ $icons-bg: #eeedf2;
     cursor: pointer;
     transition: .1s linear;
     border: 1px solid rgba(16, 123, 128, .2);
+    user-select: none;
 }
 
 @mixin buttonHover {

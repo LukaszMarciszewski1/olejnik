@@ -65,6 +65,7 @@ productSize['product-17-a2'] = null;
 productSize['product-18-a1'] = null;
 productSize['product-18-a2'] = 2.16; //b0;
 productSize['product-18-a3'] = 0.7; //b1
+productSize['product-18-a4'] = 0.35; //b1
 productSize['product-19-a1'] = null;
 productSize['product-19-a2'] = 1.4; //b0;
 productSize['product-19-a3'] = 0.7; //b1
@@ -90,6 +91,7 @@ productSize['product-27-a2'] = 47;
 productSize['product-27-a3'] = 49;
 productSize['product-28-a1'] = null;
 productSize['product-31-a1'] = null;
+productSize['product-32-a1'] = null;
 
 const productMaterial = new Array();
 productMaterial['card-b1'] = 1.493; //300g
@@ -176,6 +178,13 @@ productMaterial['product-28-b4'] = 160;
 productMaterial['product-28-b5'] = 200;
 productMaterial['product-31-b1'] = 100;
 productMaterial['product-31-b2'] = 140;
+productMaterial['product-32-b1'] = 1.25;
+productMaterial['product-32-b2'] = 1.25;
+productMaterial['product-32-b3'] = 1.35;
+productMaterial['product-32-b4'] = 1.35;
+productMaterial['product-32-b5'] = 1.35;
+productMaterial['product-32-b6'] = 1.35;
+
 
 const productSides = new Array();
 productSides['card-c1'] = 0; //one-sided
@@ -222,6 +231,8 @@ productOther['product-3-d2'] = 4;
 productOther['product-3-d3'] = 4;
 productOther['product-3-d4'] = 8;
 productOther['product-3-d5'] = 8;
+productOther['product-3-d6'] = 4;
+productOther['product-3-d7'] = 8;
 productOther['product-4-d1'] = 0;
 productOther['product-4-d2'] = 4;
 productOther['product-4-d3'] = 4;
@@ -1025,7 +1036,7 @@ function product9_Price() {
   function getProduct9_Price() {
     let productPrice = ((((((getProduct9_Size() * getProduct9_Material() * getProduct9_Inner()) * printingCost.dp) + (getProduct9_Pages() / 1.4)) +
         ((getProduct9_Cover() * getProduct9_Size()) * printingCost.dp) + (getProduct9_Other() * getProduct9_Size())) * getProduct9_Count()) +
-      (getProduct9_Binding() * getProduct9_Count())) * 1.23
+      (getProduct9_Binding() * getProduct9_Count())) * 1.73
 
       let count = getProduct9_Count()
       if(count){
@@ -2471,6 +2482,99 @@ function product31_Price() {
   return getProduct31_Price()
 }
 
+function product32_Price() {
+  theFormProduct = document.forms['product-32'];
+
+  function getProduct32_Count() {
+    count = parseInt(document.getElementById('product-32-count').value);
+    document.getElementById('product-32-count').addEventListener('change', product32_Price)
+    return count
+  }
+
+  function getProduct32_Size() {
+    size.selected = theFormProduct.elements['product-32-size'];
+    size.price = productSize[size.selected.value];
+    customSize.customDisplay = document.querySelector('.product-32-custom-size');
+    customSize.countWidth = parseInt(document.getElementById('product-32-custom-width').value);
+    customSize.countHeight = parseInt(document.getElementById('product-32-custom-height').value);
+    document.getElementById('product-32-size').addEventListener('change', product32_Price)
+    document.getElementById('product-32-custom-width').addEventListener('change', product32_Price)
+    document.getElementById('product-32-custom-height').addEventListener('change', product32_Price)
+
+    function getCustomSize() {
+
+      let customPrice = (customSize.countWidth * customSize.countHeight) /  10000 //cm
+      return customPrice
+    }
+    if (size.selected.value === 'product-32-a1') {
+      customSize.customDisplay.style.display = 'block'
+    } else {
+      customSize.customDisplay.style.display = 'none'
+    }
+
+    if (size.selected.value === 'product-32-a1') {
+      return getCustomSize()
+    } else {
+      return size.price
+    }
+
+  }
+
+  function getProduct32_Material() {
+    material.selected = theFormProduct.elements['product-32-material'];
+    material.price = productMaterial[material.selected.value];
+    document.getElementById('product-32-material').addEventListener('change', product32_Price)
+    return material.price
+  }
+  function getProduct32_Cut() {
+    let cutPrice = 0;
+    const selectedProduct = theFormProduct.elements["product-32-cut-by-contour"];
+    document.getElementById('product-32-cut-by-contour').addEventListener('click', product32_Price)
+    if (selectedProduct.checked == true) {
+      cutPrice = 5;
+    } else {
+      cutPrice = 0;
+    }
+    return cutPrice;
+  }
+  // function getProduct32_Other() {
+  //   other.selected = theFormProduct.elements['product-32-other'];
+  //   other.price = productOther[other.selected.value];
+  //   document.getElementById('product-32-other').addEventListener('change', product32_Price)
+  //   return other.price
+  // }
+
+  // function getProduct15_Cut() {
+  //   let cutPrice = 0;
+  //   const selectedProduct = theFormProduct.elements["product-15-cut-by-contour"];
+  //   document.getElementById('product-15-cut-by-contour').addEventListener('click', product15_Price)
+  //   if (selectedProduct.checked == true) {
+  //     cutPrice = 5;
+  //   } else {
+  //     cutPrice = 0;
+  //   }
+  //   return cutPrice;
+  // }
+
+  function getProduct32_Price() {
+    let productPrice = (((getProduct32_Size() * getProduct32_Material()) * printingCost.lf) * getProduct32_Count())  + 
+    (getProduct32_Size() * getProduct32_Cut()) * getProduct32_Count() * 3.23
+      let count = getProduct32_Count()
+      if(count){
+        if (count >= 1 ) {
+          productPrice = productPrice + 10
+
+        }
+        if (count >= 1 ) {
+          productPrice = productPrice + 30
+          productPrice*= 0.60
+        }
+      }
+    document.querySelector('.product-32-price span').textContent = productPrice.toFixed(2)
+  }
+  return getProduct32_Price()
+}
+
 export const calculateDp = () => {
     cardPrice();
     envelopePrice();
@@ -2484,6 +2588,7 @@ export const calculateDp = () => {
     product10_Price();
     product11_Price();
     product12_Price();
+    product32_Price();
 }
 export const calculateLf = () => {
     product13_Price();

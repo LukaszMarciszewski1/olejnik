@@ -90,7 +90,6 @@
           <img src="images/img/icons/baner.png" alt="">
           <div class="services-gallery__rectangle">
             <div class="service-gallery__line"></div>
-            <div class="rectangle-p">Lorem ipsim dolor</div>
           </div>
         </div>
         <div class="services-gallery__description">
@@ -102,7 +101,6 @@
           <img src="images/img/icons/mesh.png" alt="">
           <div class="services-gallery__rectangle">
             <div class="service-gallery__line"></div>
-            <div class="rectangle-p">Lorem ipsim dolor</div>
           </div>
         </div>
         <div class="services-gallery__description">
@@ -114,7 +112,6 @@
           <img src="images/img/icons/folia.png" alt="">
           <div class="services-gallery__rectangle">
             <div class="service-gallery__line"></div>
-            <div class="rectangle-p">Lorem ipsim dolor</div>
           </div>
         </div>
         <div class="services-gallery__description">
@@ -126,7 +123,6 @@
           <img src="images/img/icons/canvas.png" alt="">
           <div class="services-gallery__rectangle">
             <div class="service-gallery__line"></div>
-            <div class="rectangle-p">Lorem ipsim dolor</div>
           </div>
         </div>
         <div class="services-gallery__description">
@@ -138,7 +134,6 @@
           <img src="images/img/icons/bilboard.png" alt="">
           <div class="services-gallery__rectangle">
             <div class="service-gallery__line"></div>
-            <div class="rectangle-p">Lorem ipsim dolor</div>
           </div>
         </div>
         <div class="services-gallery__description">
@@ -150,7 +145,6 @@
           <img src="images/img/icons/poster2.png" alt="">
           <div class="services-gallery__rectangle">
             <div class="service-gallery__line"></div>
-            <div class="rectangle-p">Lorem ipsim dolor</div>
           </div>
         </div>
         <div class="services-gallery__description">
@@ -162,7 +156,6 @@
           <img src="images/img/icons/citilight.png" alt="">
           <div class="services-gallery__rectangle">
             <div class="service-gallery__line"></div>
-            <div class="rectangle-p">Lorem ipsim dolor</div>
           </div>
         </div>
         <div class="services-gallery__description">
@@ -174,7 +167,6 @@
           <img src="images/img/icons/wallpaper.png" alt="">
           <div class="services-gallery__rectangle">
             <div class="service-gallery__line"></div>
-            <div class="rectangle-p">Lorem ipsim dolor</div>
           </div>
         </div>
         <div class="services-gallery__description">
@@ -186,31 +178,18 @@
           <img src="images/img/icons/tablice.png" alt="">
           <div class="services-gallery__rectangle">
             <div class="service-gallery__line"></div>
-            <div class="rectangle-p">Lorem ipsim dolor</div>
           </div>
         </div>
         <div class="services-gallery__description">
           <h3>Tablice i szyldy</h3>
         </div>
       </div>
-      <!-- <div class="services-gallery__items large-format" data-option="large-format" data-content="b10">
-        <div class="services-gallery__images">
-          <img src="images/img/icons/szyldy.png" alt="">
-          <div class="services-gallery__rectangle">
-            <div class="service-gallery__line"></div>
-            <div class="rectangle-p">Lorem ipsim dolor</div>
-          </div>
-        </div>
-        <div class="services-gallery__description">
-          <h3>Szyldy</h3>
-        </div>
-      </div> -->
+      
       <div class="services-gallery__items large-format" data-option="large-format" data-content="b11">
         <div class="services-gallery__images">
           <img src="images/img/icons/shop.png" alt="">
           <div class="services-gallery__rectangle">
             <div class="service-gallery__line"></div>
-            <div class="rectangle-p">Lorem ipsim dolor</div>
           </div>
         </div>
         <div class="services-gallery__description">
@@ -1159,20 +1138,20 @@
             <button class="contact-modal-close"><i class="fas fa-times"></i></button>
           </div>
           <div class="contact-modal-form-wrap">
-            <form class="contact2-form validate-form" method="post" name="contactform" action="mail.php">
+            <form class="contact2-form validate-form" method="post" name="contactform" action="contact.php">
 
               <div class="wrap-input2 validate-input" data-validate="Name is required">
-                <input class="input2" type="text" name="name" id="name">
+                <input class="input2" type="text" name="name" id="name" required>
                 <span class="focus-input2" data-placeholder="IMIĘ"></span>
               </div>
 
               <div class="wrap-input2 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                <input class="input2" type="email" name="email" id="email">
+                <input class="input2" type="email" name="email" id="email" required>
                 <span class="focus-input2" data-placeholder="EMAIL"></span>
               </div>
 
               <div class="wrap-input2 validate-input" data-validate="Message is required">
-                <textarea class="input2" name="message" id="message"></textarea>
+                <textarea class="input2" name="message" id="message" required></textarea>
                 <span class="focus-input2" data-placeholder="WIADOMOŚĆ"></span>
               </div>
 
@@ -1180,6 +1159,10 @@
                 <button class="contact2-form-btn special" type="submit" name="submit">
                   Wyślij
                 </button>
+              </div>
+
+              <div class="mail-status">
+                <p>Wiadomość została wysłana</p>
               </div>
             </form>
             <div class="resize"></div>
