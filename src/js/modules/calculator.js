@@ -1,49 +1,54 @@
 "use strict";
+// modifier(productSheets) * ( y * size) = price
+// price / modifier(productSheets) = result => result / size(format(B1 or A1) / A3) = result => result / A3 = modificator(productCover)
+//modifier price sheet material --------->
+// y * size = price --> price / size = y
 
+// koszt arkusza po przeliczeniu z formatów b1 i a1 
+//  modifier * (y * size) = price --------->
+//  price / modifier = x --> x / 5.61167(b1 / a3) = a --> a / 0.12474 = y 
 const productSize = new Array();
-productSize['card-a1'] = 0.0051; //90x50 mm + cut price
-productSize['card-a2'] = 0.0051; //85x55 mm + cut price
-productSize['envelope-a1'] = 0.125;
-productSize['envelope-a2'] = 1.7;
-productSize['envelope-a3'] = 1.4;
-productSize['envelope-a4'] = 1.3;
-productSize['envelope-a5'] = 1.15;
+productSize['product-1-a1'] = 0.005; //wizytówki
+productSize['product-1-a2'] = 0.005; //wizytówki
+productSize['product-2-a1'] = 0.0741958254543206; //c4
+productSize['product-2-a2'] = 0.0401894054544237; //c5
+productSize['product-2-a3'] = 0.0216404490908435; //c6
+productSize['product-2-a4'] = 0.0267929369696158; //dl
 productSize['product-3-a1'] = 0.12474; //a3
 productSize['product-3-a2'] = 0.06237; //a4
-productSize['product-3-a3'] = 0.03108; //a5
-productSize['product-3-a4'] = 0.01554; //a6
+productSize['product-3-a3'] = 0.031185; //a5
+productSize['product-3-a4'] = 0.0155925; //a6
 productSize['product-3-a5'] = 0.02079; //dl
-productSize['product-4-a1'] = 0.12474; //a3
-productSize['product-4-a2'] = 0.06237; //a4
-productSize['product-4-a3'] = 0.03108; //a5
-productSize['product-4-a4'] = 0.01554; //a6
-productSize['product-4-a5'] = 0.00777;
-productSize['product-4-a6'] = 0.02079;
-productSize['product-4-a7'] = null; //custom
+productSize['product-4-a1'] = 0.06237; //a4
+productSize['product-4-a2'] = 0.031185; //a5
+productSize['product-4-a3'] = 0.0155925; //a6
+productSize['product-4-a4'] = 0.02079; //dl
 productSize['product-5-a1'] = 0.06237; //a4
-productSize['product-5-a2'] = 0.03108; //a5
-productSize['product-5-a3'] = 0.01554; //a6
+productSize['product-5-a2'] = 0.031185; //a5
+productSize['product-5-a3'] = 0.044; //b5
+productSize['product-5-a4'] = 0.022; //b6
 productSize['product-6-a1'] = 0.12474; //a3
 productSize['product-6-a2'] = 0.06237; //a4
-productSize['product-6-a3'] = 0.03108; //a5
-productSize['product-6-a4'] = 0.01554; //a6
-productSize['product-6-a5'] = 0.0875; //b4
+productSize['product-6-a3'] = 0.031185; //a5
+productSize['product-6-a4'] = 0.0155925; //a6
+productSize['product-6-a5'] = 0.088; //b4
 productSize['product-6-a6'] = 0.044; //b5
-productSize['product-7-a1'] = 0.03108; //a5
-productSize['product-7-a2'] = 0.01554; //a6
-productSize['product-7-a3'] = 0.00777; //a7
+productSize['product-7-a1'] = 0.031185; //a5
+productSize['product-7-a2'] = 0.0155925; //a6
+productSize['product-7-a3'] = 0.00779625 //a7
 productSize['product-8-a1'] = 0.12474; //a3;
 productSize['product-8-a2'] = 0.12474; //a3;
 productSize['product-9-a1'] = 0.06237; //a4
-productSize['product-9-a2'] = 0.03108; //a5
-productSize['product-9-a3'] = 0.01554; //a6
-productSize['product-9-a4'] = 0.03876; //a6
-productSize['product-9-a5'] = 0.0799; //a6
+productSize['product-9-a2'] = 0.031185; //a5
+productSize['product-9-a3'] = 0.0155925; //a6
+productSize['product-9-a4'] = 0.044; //b5
 productSize['product-10-a1'] = 0.12474; //a3;
 productSize['product-10-a2'] = 0.06237; //a4
 productSize['product-11-a1'] = 0.06237; //a4
-productSize['product-11-a2'] = 0.03108; //a5
-productSize['product-11-a3'] = 0.01554; //a6
+productSize['product-11-a2'] = 0.031185; //a5
+productSize['product-11-a3'] = 0.0155925; //a6
+productSize['product-11-a3'] = 0.0155925; //a6
+productSize['product-11-a4'] = 0.044; //b5
 productSize['product-12-a1'] = 0.06237; //a4
 productSize['product-13-a1'] = null;
 productSize['product-13-a2'] = 1;
@@ -72,7 +77,6 @@ productSize['product-19-a3'] = 0.7; //b1
 productSize['product-19-a4'] = 0.35; //b2
 productSize['product-20-a1'] = null;
 productSize['product-21-a1'] = null;
-// productSize['product-22-a1'] = null;
 productSize['product-23-a1'] = null;
 productSize['product-24-a1'] = 4;
 productSize['product-24-a2'] = 9;
@@ -91,56 +95,74 @@ productSize['product-27-a2'] = 47;
 productSize['product-27-a3'] = 49;
 productSize['product-28-a1'] = null;
 productSize['product-31-a1'] = null;
-productSize['product-32-a1'] = null;
 
 const productMaterial = new Array();
-productMaterial['card-b1'] = 1.493; //300g
-productMaterial['card-b2'] = 1.493; //300g
-productMaterial['card-b3'] = 1.493; //300g
-productMaterial['product-3-b1'] = 1.199; //120g
-productMaterial['product-3-b2'] = 1.248; //150g
-productMaterial['product-3-b3'] = 1.346; //200g
-productMaterial['product-3-b4'] = 1.395 //250g
-productMaterial['product-3-b5'] = 1.199;
-productMaterial['product-3-b6'] = 1.248;
-productMaterial['product-3-b7'] = 1.346;
-productMaterial['product-3-b8'] = 1.395;
-productMaterial['product-4-b1'] = 1.346; //200g
-productMaterial['product-4-b2'] = 1.395; //250g
-productMaterial['product-4-b3'] = 1.493; //300g
-productMaterial['product-4-b4'] = 1.346; //200g
-productMaterial['product-4-b5'] = 1.395; //250g
-productMaterial['product-4-b6'] = 1.493; //300g 
-productMaterial['product-5-b1'] = 1.149; //100g 
-productMaterial['product-5-b2'] = 1.199; //120g
-productMaterial['product-5-b3'] = 1.149; //100g
-productMaterial['product-5-b4'] = 1.199; //120g
-productMaterial['product-5-b5'] = 1.248; //150g
-productMaterial['product-5-b6'] = 1.149; //100g
-productMaterial['product-5-b7'] = 1.199; //120g
-productMaterial['product-5-b8'] = 1.248; //150g
-productMaterial['product-6-b1'] = 1.395; //250g
-productMaterial['product-6-b2'] = 1.493; //300g 
-productMaterial['product-6-b3'] = 1.395; //250g
-productMaterial['product-6-b4'] = 1.493; //300g 
-productMaterial['product-7-b1'] = 1.395; //250g
-productMaterial['product-7-b2'] = 1.493; //300g
-productMaterial['product-7-b3'] = 1.395; //250g
-productMaterial['product-7-b4'] = 1.493; //300g
-productMaterial['product-8-b1'] = 1.395; //250g
-productMaterial['product-8-b2'] = 1.493; //300g
-productMaterial['product-8-b3'] = 1.395; //250g
-productMaterial['product-8-b4'] = 1.493; //300g
-productMaterial['product-9-b1'] = 1.100; //80g
-productMaterial['product-9-b2'] = 1.149; //100g
-productMaterial['product-9-b3'] = 1.199; //120g
-productMaterial['product-10-b1'] = 1.493; //300g
-productMaterial['product-10-b2'] = 1.493; //300g
-productMaterial['product-10-b3'] = 1.510;
-productMaterial['product-11-b1'] = 1.149; //100g
-productMaterial['product-11-b2'] = 1.199; //120g
-productMaterial['product-12-b1'] = 1.149; //100g
-productMaterial['product-12-b2'] = 1.199; //120g
+productMaterial['product-1-b1'] = 2.613; //300g kreda SRA3 0,326 0,78gr/ark B1
+productMaterial['product-1-b2'] = 3.792; //300g satyna SRA3 0,473
+productMaterial['product-1-b3'] = 4.746; //300g DNS SRA3 0,592
+productMaterial['product-1-b4'] = 3.094; //350g kreda SRA3
+productMaterial['product-1-b5'] = 4.746; //350g satyna SRA3
+productMaterial['product-2-b1'] = 1.94081; // z paskiem smp
+productMaterial['product-3-b1'] = 0.946; //115g kreda SRA3 0,118 0,28gr/ark B1
+productMaterial['product-3-b2'] = 1.066; //130g kreda SRA3 0,133 0,32gr/ark B1
+productMaterial['product-3-b3'] = 1.235; //150g kreda SRA3 0,154 0,37gr/ark B1
+productMaterial['product-3-b4'] = 1.395; //170g kreda SRA3 0,174 0,42gr/ark B1
+productMaterial['product-3-b5'] = 1.643; //200g kreda SRA3 0,205 0,49gr/ark B1
+productMaterial['product-3-b6'] = 1.315; //120g satyna SRA3 0,164
+productMaterial['product-3-b7'] = 1.756; //160g satyna SRA3 0,219
+productMaterial['product-3-b8'] = 2.405; //200g satyna SRA3 0,300
+productMaterial['product-4-b1'] = 1.643; //200g kreda SRA3
+productMaterial['product-4-b2'] = 2.116; //250g kreda SRA3
+productMaterial['product-4-b3'] = 2.613; //300g kreda SRA3
+productMaterial['product-4-b4'] = 2.405; //200g satyna SRA3
+productMaterial['product-4-b5'] = 3.159; //250g satyna SRA3
+productMaterial['product-4-b6'] = 3.792; //300g satyna SRA3 
+productMaterial['product-5-b1'] = 0.7698; //100g offset
+productMaterial['product-5-b2'] = 0.946; //115g kreda SRA3-0,118
+productMaterial['product-5-b3'] = 1.066; //130g kreda SRA3
+productMaterial['product-5-b4'] = 1.235; //150g kreda SRA3
+productMaterial['product-5-b5'] = 1.395; //170g kreda SRA3
+productMaterial['product-5-b6'] = 1.090; //100g satyna SRA3
+productMaterial['product-5-b7'] = 1.315; //120g satyna SRA3
+productMaterial['product-5-b8'] = 1.756; //160g satyna SRA3
+productMaterial['product-6-b1'] = 2.116; //250g kreda
+productMaterial['product-6-b2'] = 2.613; //300g kreda 
+productMaterial['product-6-b3'] = 3.094; //350g kreda
+productMaterial['product-6-b4'] = 3.159; //250g satyna 
+productMaterial['product-6-b5'] = 3.792; //300g satyna 
+productMaterial['product-6-b6'] = 4.746; //350g satyna
+productMaterial['product-7-b1'] = 2.116; //250g kreda
+productMaterial['product-7-b2'] = 2.613; //300g kreda
+productMaterial['product-7-b3'] = 3.159; //250g satyna
+productMaterial['product-7-b4'] = 3.792; //300g satyna
+productMaterial['product-8-b1'] = 2.116; //250g kreda
+productMaterial['product-8-b2'] = 2.613; //300g kreda
+productMaterial['product-8-b3'] = 3.159; //250g satyna
+productMaterial['product-8-b4'] = 3.792; //300g satyna
+productMaterial['product-9-b1'] = 0.5670; //60g creamy
+productMaterial['product-9-b2'] = 0.6612; //70g creamy
+productMaterial['product-9-b3'] = 0.7555; //80g creamy
+productMaterial['product-9-b4'] = 0.7360; //70g lux cream
+productMaterial['product-9-b5'] = 0.8465; //80g lux cream
+productMaterial['product-9-b6'] = 0.9501; //90g lux cream
+productMaterial['product-9-b7'] = 0.5380; //70g offset
+productMaterial['product-9-b8'] = 0.6355; //80g offset
+productMaterial['product-9-b9'] = 0.6690; //90g offset
+productMaterial['product-9-b10'] = 0.7698; //100g offset
+productMaterial['product-9-b11'] = 0.780; //90g kreda
+productMaterial['product-9-b12'] = 0.830; //100g kreda
+productMaterial['product-9-b13'] = 0.946; //115g kreda
+productMaterial['product-9-b14'] = 1.066; //130g kreda
+productMaterial['product-9-b15'] = 0.986; //90g satyna
+productMaterial['product-9-b16'] = 1.090; //100g satyna
+productMaterial['product-9-b17'] = 1.315; //120g satyna
+productMaterial['product-10-b1'] = 2.613; //300g kreda
+productMaterial['product-10-b2'] = 3.792; //300g satyna
+productMaterial['product-10-b3'] = 2.9809; //SRA3 karton gc1 300g
+productMaterial['product-11-b1'] = 0.6690; //90g offset
+productMaterial['product-11-b2'] = 0.7698; //100g offset
+productMaterial['product-12-b1'] = 0.6690; //90g offset
+productMaterial['product-12-b2'] = 0.7698; //100g offset
 productMaterial['product-13-b1'] = 1.5;
 productMaterial['product-13-b2'] = 1.75;
 productMaterial['product-13-b3'] = 1.75;
@@ -158,8 +180,6 @@ productMaterial['product-19-b2'] = 3.2;  // * 2 //1.6
 productMaterial['product-20-b1'] = 1.75;
 productMaterial['product-21-b1'] = 1.35;
 productMaterial['product-21-b2'] = 1.35;
-// productMaterial['product-22-b1'] = 1.35;
-// productMaterial['product-22-b2'] = 1.35;
 productMaterial['product-23-b1'] = 1.5;
 productMaterial['product-23-b2'] = 1.35;
 productMaterial['product-23-b3'] = 1.35;
@@ -178,114 +198,44 @@ productMaterial['product-28-b4'] = 160;
 productMaterial['product-28-b5'] = 200;
 productMaterial['product-31-b1'] = 100;
 productMaterial['product-31-b2'] = 140;
-productMaterial['product-32-b1'] = 1.25;
-productMaterial['product-32-b2'] = 1.25;
-productMaterial['product-32-b3'] = 1.35;
-productMaterial['product-32-b4'] = 1.35;
-productMaterial['product-32-b5'] = 1.35;
-productMaterial['product-32-b6'] = 1.35;
-
 
 const productSides = new Array();
-productSides['card-c1'] = 0; //one-sided
-productSides['card-c2'] = 1; //double-sided
-productSides['envelope-b1'] = 1;
-productSides['envelope-b2'] = 1.8;
-productSides['product-3-c1'] = 0;
-productSides['product-3-c2'] = 1;
-productSides['product-4-c1'] = 0;
-productSides['product-4-c2'] = 1;
-productSides['product-6-c1'] = 0;
-productSides['product-6-c2'] = 1;
-productSides['product-7-c1'] = 0;
-productSides['product-7-c2'] = 1;
-productSides['product-8-c1'] = 0;
-productSides['product-8-c2'] = 1;
-productSides['product-10-c1'] = 0;
-productSides['product-10-c2'] = 1;
 productSides['product-13-c1'] = 0;
 productSides['product-13-c2'] = 1;
 
-// productSides['product-13-c2'] = 1.5714;
-
 const productCover = new Array();
-productCover['product-5-c1'] = 1.395;
-productCover['product-5-c2'] = 2.395;
-productCover['product-9-c1'] = 1.395;
-productCover['product-9-c2'] = 1.395;
-productCover['product-9-c3'] = 1.493;
-productCover['product-11-c1'] = 0;
-productCover['product-11-c2'] = 1.395;
-productCover['product-11-c3'] = 1.493;
+productCover['product-5-h1'] = 1.08098581; //SRA3 karton gc1 250g formaty b1 i a1 * 0.4237
+productCover['product-5-h2'] = 1.3799909; //SRA3 karton gc1 300g formaty b1 i a1 * 0.4237
+productCover['product-5-h3'] = 1.643; //200g kreda SRA3 0,264
+productCover['product-5-h4'] = 2.116; //250g kreda SRA3 0,264
+productCover['product-5-h5'] = 2.613; //300g kreda SRA3 0,326
+productCover['product-5-h6'] = 3.094; //350g kreda SRA3 0,386
+productCover['product-5-h7'] = 2.405; //200g satyna SRA3 0,394
+productCover['product-5-h8'] = 3.159; //250g satyna SRA3 0,394
+productCover['product-5-h9'] = 3.792; //300g satyna SRA3 0,473
+productCover['product-5-h10'] = 4.746; //350g satyna SRA3 0,592
+productCover['product-9-h1'] = 1.08098581; //SRA3 karton gc1 250g formaty b1 i a1 * 0.4237
+productCover['product-9-h2'] = 1.3799909; //SRA3 karton gc1 300g formaty b1 i a1 * 0.4237
+productCover['product-9-h3'] = 1.643; //200g kreda SRA3 0,264
+productCover['product-9-h4'] = 2.116; //250g kreda SRA3 0,264
+productCover['product-9-h5'] = 2.613; //300g kreda SRA3 0,326
+productCover['product-9-h6'] = 3.094; //350g kreda SRA3 0,386
+productCover['product-9-h7'] = 2.405; //200g satyna SRA3 0,394
+productCover['product-9-h8'] = 3.159; //250g satyna SRA3 0,394
+productCover['product-9-h9'] = 3.792; //300g satyna SRA3 0,473
+productCover['product-9-h10'] = 4.746; //350g satyna SRA3 0,592
+productCover['product-11-h1'] = 1.08098581; //SRA3 karton gc1 250g formaty b1 i a1 * 0.4237
+productCover['product-11-h2'] = 1.3799909; //SRA3 karton gc1 300g formaty b1 i a1 * 0.4237
+productCover['product-11-h3'] = 1.643; //200g kreda SRA3 0,264
+productCover['product-11-h4'] = 2.116; //250g kreda SRA3 0,264
+productCover['product-11-h5'] = 2.613; //300g kreda SRA3 0,326
+productCover['product-11-h6'] = 3.094; //350g kreda SRA3 0,386
+productCover['product-11-h7'] = 2.405; //200g satyna SRA3 0,394
+productCover['product-11-h8'] = 3.159; //250g satyna SRA3 0,394
+productCover['product-11-h9'] = 3.792; //300g satyna SRA3 0,473
+productCover['product-11-h10'] = 4.746; //350g satyna SRA3 0,592
 
 const productOther = new Array();
-productOther['card-d1'] = 0; //none
-productOther['card-d2'] = 4; //one-sided laminate  gloss
-productOther['card-d3'] = 4; //one-sided laminate  mat
-productOther['card-d4'] = 4; //one-sided laminate  soft-tuch
-productOther['card-d5'] = 8; //double-sided laminate
-productOther['card-d6'] = 8; //double-sided laminate
-productOther['card-d7'] = 8; //double-sided laminate
-productOther['product-3-d1'] = 0;
-productOther['product-3-d2'] = 4;
-productOther['product-3-d3'] = 4;
-productOther['product-3-d4'] = 8;
-productOther['product-3-d5'] = 8;
-productOther['product-3-d6'] = 4;
-productOther['product-3-d7'] = 8;
-productOther['product-4-d1'] = 0;
-productOther['product-4-d2'] = 4;
-productOther['product-4-d3'] = 4;
-productOther['product-4-d4'] = 4;
-productOther['product-4-d5'] = 8;
-productOther['product-4-d6'] = 8;
-productOther['product-4-d7'] = 8;
-productOther['product-5-d1'] = 0;
-productOther['product-5-d2'] = 4;
-productOther['product-5-d3'] = 4;
-productOther['product-5-d4'] = 4;
-productOther['product-5-d5'] = 8;
-productOther['product-5-d6'] = 8;
-productOther['product-5-d7'] = 8;
-productOther['product-6-d1'] = 0;
-productOther['product-6-d2'] = 4;
-productOther['product-6-d3'] = 4;
-productOther['product-6-d4'] = 4;
-productOther['product-6-d5'] = 8;
-productOther['product-6-d6'] = 8;
-productOther['product-6-d7'] = 8;
-productOther['product-7-d1'] = 0;
-productOther['product-7-d2'] = 4;
-productOther['product-7-d3'] = 4;
-productOther['product-7-d4'] = 4;
-productOther['product-7-d5'] = 8;
-productOther['product-7-d6'] = 8;
-productOther['product-7-d7'] = 8;
-productOther['product-8-d1'] = 0;
-productOther['product-8-d2'] = 4;
-productOther['product-8-d3'] = 4;
-productOther['product-8-d4'] = 4;
-productOther['product-8-d5'] = 8;
-productOther['product-8-d6'] = 8;
-productOther['product-8-d7'] = 8;
-productOther['product-9-d1'] = 0;
-productOther['product-9-d2'] = 4;
-productOther['product-9-d3'] = 4;
-productOther['product-9-d4'] = 4;
-productOther['product-10-d1'] = 0;
-productOther['product-10-d2'] = 4;
-productOther['product-10-d3'] = 4;
-productOther['product-10-d4'] = 4;
-productOther['product-10-d5'] = 8;
-productOther['product-10-d6'] = 8;
-productOther['product-10-d7'] = 8;
-productOther['product-11-d1'] = 0;
-productOther['product-11-d2'] = 4;
-productOther['product-11-d3'] = 4;
-productOther['product-11-d4'] = 4;
-productOther['product-11-d5'] = 8;
-productOther['product-11-d6'] = 8;
-productOther['product-11-d7'] = 8;
 productOther['product-13-d1'] = 3;
 productOther['product-13-d2'] = 1;
 productOther['product-13-d3'] = 0;
@@ -298,8 +248,6 @@ productOther['product-15-d3'] = 15;
 productOther['product-15-d4'] = 15;
 productOther['product-21-d1'] = 15;
 productOther['product-21-d2'] = 15;
-// productOther['product-22-d1'] = 15;
-// productOther['product-22-d2'] = 15;
 productOther['product-23-d1'] = 15;
 productOther['product-23-d2'] = 15;
 productOther['product-24-d1'] = 0;
@@ -320,6 +268,8 @@ productCrease['product-6-e1'] = 0;
 productCrease['product-6-e2'] = 0.1;
 productCrease['product-6-e3'] = 0.2;
 productCrease['product-6-e4'] = 0.3;
+productCrease['product-10-e1'] = 0.1;
+productCrease['product-10-e2'] = 0.2;
 productCrease['product-28-e1'] = 0;
 productCrease['product-28-e2'] = 3;
 productCrease['product-28-e3'] = 4;
@@ -327,21 +277,13 @@ productCrease['product-28-e4'] = 5;
 productCrease['product-28-e5'] = 6;
 
 const productBinding = new Array();
-productBinding['product-5-e1'] = 0.5;
-productBinding['product-5-e2'] = 1;
-productBinding['product-8-e1'] = 2.1; //2.1
-productBinding['product-8-e2'] = 2; //2
-productBinding['product-9-e1'] = 1;
-productBinding['product-11-e1'] = 2;
-productBinding['product-11-e2'] = 1;
-
-const productInner = new Array();
-productInner['product-5-f1'] = 1;
-productInner['product-5-f2'] = 0.65;
-productInner['product-9-f1'] = 0.65;
-productInner['product-9-f2'] = 1;
-productInner['product-11-f1'] = 0.65;
-productInner['product-11-f2'] = 1;
+productBinding['product-5-e1'] = 0.3; //zezytowa
+productBinding['product-5-e2'] = 0.6; //spiralna
+productBinding['product-8-e1'] = 1; 
+productBinding['product-8-e2'] = 1.5; 
+productBinding['product-9-e1'] = 0.5; //klejona
+productBinding['product-11-e1'] = 0.6;//spiralna
+productBinding['product-11-e2'] = 0.5;//klejona
 
 const productAccessories = new Array();
 productAccessories['product-7-e1'] = 0;
@@ -361,63 +303,60 @@ productAccessories['product-26-e2'] = 159;
 productAccessories['product-27-e1'] = 70;
 productAccessories['product-27-e2'] = 90;
 productAccessories['product-27-e3'] = 110;
-// productAccessories['product-28-e1'] = 70;
-// productAccessories['product-28-e2'] = 90;
-// productAccessories['product-28-e3'] = 110;
 
 const productUnderlay = new Array();
 productUnderlay['product-21-e1'] = 30;
 productUnderlay['product-21-e2'] = 45;
 productUnderlay['product-21-e3'] = 70;
-// productUnderlay['product-22-e1'] = 30;
-// productUnderlay['product-22-e2'] = 45;
-// productUnderlay['product-22-e3'] = 70;
 
-let count = 0;
+const productSheets = new Array();
+productSheets['product-1-f1'] = 1; //SRA3
+
 let theFormProduct = null;
-let getPrice = 0;
-
-const printingCost = {
-  dp: 8.16, 
-  lf: 20,
-  cut: 7,
-}
 
 const size = {
   selected: null,
   price: 0,
+  sra3: 0.12474,
+  a4: 0.06237,
+  b4: 0.08825,
 };
-
+//digital print cost
+const priceDigitalPrint = {
+  nonePrint: 0,
+  SRA3_colorOneSided: 0.12,
+  SRA3_colorAndBlack: 0.192,
+  SRA3_colorAndColor: 0.24,
+  SRA3_blackOneSided: 0.072,
+  SRA3_blackAndBlack: 0.144,
+  SRA3_blackOneSidedBlack: 0.02,
+  SRA3_blackDubleSideBlack: 0.04,
+  A4_blackOneSide:0.01,
+  A4_blackDubleSide:0.02
+}
+//large format print cost
+const printingCost = {
+  lf: 20,
+  cut: 7,
+}
 const customSize = {
   customDisplay: null,
   countWidth: 0,
   countHeight: 0,
 }
-
 const material = {
   selected: null,
   price: 0,
 };
-
 const sides = {
   selected: null,
   price: 0,
 };
-
 const other = {
   selected: null,
   price: 0,
 };
-
 const crease = {
-  selected: null,
-  price: 0,
-};
-const binding = {
-  selected: null,
-  price: 0,
-};
-const inner = {
   selected: null,
   price: 0,
 };
@@ -425,7 +364,6 @@ const accessories = {
   selected: null,
   price: 0,
 };
-
 const installation = {
   selected: null,
   price: 0,
@@ -434,797 +372,918 @@ const underlay = {
   selected: null,
   price: 0,
 }
-const cover = {
-  selected: null,
-  price: 0,
+const priceCondition = (count, price) => {
+  if(count < 20){
+    price *= 12
+  }
+  else if(count >= 20 && count < 50){
+    price *= 8
+  }
+  else if(count >= 50 && count < 100){
+    price *= 6
+  }
+  else if(count >= 100 && count < 300){
+    price *= 5
+  }
+  else if(count >= 300 && count < 500){
+    price *= 4
+  }
+  else if(count >= 500 && count < 1000){
+    price *= 3
+  }
+  else if(count >= 1000){
+    price *= 2.5
+  }
+  else price = 0
+
+  return price
 }
 
-function cardPrice() {
-  theFormProduct = document.forms['product-card'];
-  function getCardCount() {
-    count = parseInt(document.getElementById('card-count').value);
-    document.getElementById('card-count').addEventListener('change', cardPrice)
-    return count
+class Foil {
+  constructor(product, selectForm, sel1, sel2, sel3, sel4, sel5, sel6, sel7) {
+    this.sel1 = sel1
+    this.sel2 = sel2
+    this.sel3 = sel3
+    this.sel4 = sel4
+    this.sel5 = sel5
+    this.sel6 = sel6
+    this.sel7 = sel7
+    this.theProductForm = document.forms[product]
+    this.selected = this.theProductForm.elements[selectForm]
+    this.price = 0.3
   }
+  getPriceFoil(countEl, sizeEl) {
+    let numberEl = sizeEl / size.sra3
+    if (numberEl > 0.5 && numberEl < 1) numberEl = 1  //jeśli został wybrany format b4 to jego wartość jest równa A3
+    if(numberEl > 0.25 && numberEl < 0.5) numberEl = 0.5   
+    let modifier = Math.ceil(numberEl * countEl)
+    let price = 0
 
-  function getCardSize() {
-    size.selected = theFormProduct.elements['card-size'];
-    size.price = productSize[size.selected.value];
-    document.getElementById('card-size').addEventListener('change', cardPrice)
-    return size.price
-  }
-
-  function getCardMaterial() {
-    material.selected = theFormProduct.elements['card-material'];
-    material.price = productMaterial[material.selected.value];
-    document.getElementById('card-material').addEventListener('change', cardPrice)
-    return material.price
-  }
-
-  function getCardSides() {
-    sides.selected = theFormProduct.elements['card-sides'];
-    sides.price = productSides[sides.selected.value];
-    let sidesPrice = ((getCardSize() * sides.price) * printingCost.dp)
-    document.getElementById('card-sides').addEventListener('change', cardPrice)
-    return sidesPrice;
-  }
-
-  function getCardOther() {
-    other.selected = theFormProduct.elements['card-other'];
-    other.price = productOther[other.selected.value];
-    document.getElementById('card-other').addEventListener('change', cardPrice)
-    return other.price;
-  }
-
-  function getCardCorners() {
-    let cornersPrice = 0;
-    const selectedCorners = theFormProduct.elements["card-corners"];
-    if (selectedCorners.checked == true) {
-      cornersPrice = 1;
+    if (this.selected.value === this.sel2 || this.selected.value === this.sel3 || this.selected.value === this.sel4) {
+      price = this.price * modifier
+    } else if (this.selected.value === this.sel5 || this.selected.value === this.sel6 || this.selected.value === this.sel7) {
+      price = (this.price * 2) * modifier
     } else {
-      cornersPrice = 0;
+      price = 0
     }
-    document.getElementById('card-corners').addEventListener('click', cardPrice)
-    return cornersPrice;
+    return price
   }
-
-  function getPriceCard() {
-    let productPrice = (((((getCardSize() * getCardMaterial()) * (printingCost.dp * 2)) + getCardSides()) * getCardCount()) +
-      ((getCardSize() * getCardOther()) * getCardCount()) + (getCardCorners() * getCardCount() / 24)) * 3.5
-
-      let count = getCardCount()
-      if(count){
-        if (count >= 1 ) {
-          productPrice = productPrice + 10
-          productPrice*= 0.55
-        }
-      }
-
-    document.querySelector('.card-price span').textContent = productPrice.toFixed(2)
-  }
-  return getPriceCard()
 }
 
-function envelopePrice() {
-  theFormProduct = document.forms['product-envelope'];
-
-  function getEnvelopeCount() {
-    count = parseInt(document.getElementById('envelope-count').value);
-    document.getElementById('envelope-count').addEventListener('change', envelopePrice)
-    return count
+class DigitalPrint {
+  constructor(product, selectForm, prodC1, prodC2, prodC3, prodC4, prodC5, prodC6, prodC7) {
+    this.prodC1 = prodC1 //4 + 0 kolor
+    this.prodC2 = prodC2 //4 + 1 kolor
+    this.prodC3 = prodC3 //4 + 4 kolor
+    this.prodC4 = prodC4 //1 + 0 kolor
+    this.prodC5 = prodC5 //1 + 1 kolor
+    this.prodC6 = prodC6 //1 + 1 czarno-biały
+    this.prodC7 = prodC7 //1 + 1 czarno-biały
+    this.theProductForm = document.forms[product]
+    this.selected = this.theProductForm.elements[selectForm]
   }
-
-  function getEnvelopeSize() {
-    size.selected = theFormProduct.elements['envelope-size'];
-    size.price = productSize[size.selected.value];
-    document.getElementById('envelope-size').addEventListener('change', envelopePrice)
-    return size.price
-  }
-
-  function getEnvelopeSides() {
-    sides.selected = theFormProduct.elements['envelope-sides'];
-    sides.price = productSides[sides.selected.value];
-    document.getElementById('envelope-sides').addEventListener('change', envelopePrice)
-    return sides.price
-  }
-
-  function getEnvelopePersonalize() {
-    let productPrice = 0;
-    const selectedPersonalize = theFormProduct.elements["envelope-personalize"];
-
-    if (selectedPersonalize.checked == true) {
-      productPrice = 7;
-    } else {
-      productPrice = 0;
-    }
-    document.getElementById('envelope-personalize').addEventListener('change', envelopePrice)
-    return productPrice;
-  }
-
-  function getPriceEnvelope() {
-    getPrice = Math.round((getEnvelopeSize() * getEnvelopeCount()) + (getEnvelopeSides() * getEnvelopeCount()) + getEnvelopePersonalize())
-    document.querySelector('.envelope-price span').textContent = getPrice.toFixed(2)
-  }
-  return getPriceEnvelope()
-}
-
-function product3_Price() {
-  theFormProduct = document.forms['product-3'];
-
-  function getProduct3_Count() {
-    count = parseInt(document.getElementById('product-3-count').value);
-    document.getElementById('product-3-count').addEventListener('change', product3_Price)
-    return count
-  }
-
-  function getProduct3_Size() {
-    size.selected = theFormProduct.elements['product-3-size'];
-    size.price = productSize[size.selected.value];
-    document.getElementById('product-3-size').addEventListener('change', product3_Price)
-    return size.price
-  }
-
-  function getProduct3_Material() {
-    material.selected = theFormProduct.elements['product-3-material'];
-    material.price = productMaterial[material.selected.value];
-    document.getElementById('product-3-material').addEventListener('change', product3_Price)
-    return material.price
-  }
-
-  function getProduct3_Sides() {
-    sides.selected = theFormProduct.elements['product-3-sides'];
-    sides.price = productSides[sides.selected.value];
-    let sidesPrice = ((getProduct3_Size() * sides.price) * printingCost.dp)
-    document.getElementById('product-3-sides').addEventListener('change', product3_Price)
-    return sidesPrice;
-  }
-
-  function getProduct3_Other() {
-    other.selected = theFormProduct.elements['product-3-other'];
-    other.price = productOther[other.selected.value];
-    document.getElementById('product-3-other').addEventListener('change', product3_Price)
-    return other.price;
-  }
-
-  function getProduct3_Crease() {
-    crease.selected = theFormProduct.elements['product-3-crease'];
-    crease.price = productCrease[crease.selected.value];
-    document.getElementById('product-3-crease').addEventListener('change', product3_Price)
-    return crease.price;
-  }
-
-  function getProduct3_Price() {
-    let productPrice = ((((((getProduct3_Size() * getProduct3_Material()) * printingCost.dp) + getProduct3_Sides()) * getProduct3_Count()) +
-      ((getProduct3_Size() * getProduct3_Other()) * getProduct3_Count()) + (getProduct3_Crease() * getProduct3_Count()))) * 3.5
-
-    let count = getProduct3_Count()
-    if(count){
-      if (count >= 1 ) {
-        productPrice = productPrice + 10
-        productPrice*= 0.60
-      }
-    }
-    document.querySelector('.product-3-price span').textContent = productPrice.toFixed(2)
-
-  }
-
-  return getProduct3_Price()
-}
-
-function product4_Price() {
-  theFormProduct = document.forms['product-4'];
-
-  function getProduct4_Count() {
-    count = parseInt(document.getElementById('product-4-count').value);
-    document.getElementById('product-4-count').addEventListener('change', product4_Price)
-    return count
-  }
-
-  function getProduct4_Size() {
-    size.selected = theFormProduct.elements['product-4-size'];
-    size.price = productSize[size.selected.value];
-    customSize.customDisplay = [...document.querySelectorAll('.product-4-custom-size')];
-    customSize.countWidth = parseInt(document.getElementById('product-4-custom-width').value);
-    customSize.countHeight = parseInt(document.getElementById('product-4-custom-height').value);
-    document.getElementById('product-4-size').addEventListener('change', product4_Price)
-    document.getElementById('product-4-custom-width').addEventListener('change', product4_Price)
-    document.getElementById('product-4-custom-height').addEventListener('change', product4_Price)
-    function getCustomSize() {
-      let customPrice = (customSize.countWidth * customSize.countHeight) / 1000000 //mm
-      return customPrice
-    }
-    if (size.selected.value === 'product-4-a7') {
-      customSize.customDisplay.forEach(item => item.style.display = 'block')
-    } else {
-      customSize.customDisplay.forEach(item => item.style.display = 'none')
-    }
-
-    if (size.selected.value === 'product-4-a7') {
-      return getCustomSize()
-    } else {
-      return size.price
-    }
+  getPricePrint(countEl, sizeEl) {
+    let price = 0
+    // let format = (countEl * sizeEl)
+    let numberEl = sizeEl / size.sra3
+    let modifier = numberEl * countEl
    
-  }
+    // let selectedSize = theFormProduct1.elements['product-1-size'];
+    // let selectedFormat = productSize[selectedSize.value]
 
-  function getProduct4_Material() {
-    material.selected = theFormProduct.elements['product-4-material'];
-    material.price = productMaterial[material.selected.value];
-    document.getElementById('product-4-material').addEventListener('change', product4_Price)
-    return material.price
-  }
-
-  function getProduct4_Sides() {
-    sides.selected = theFormProduct.elements['product-4-sides'];
-    sides.price = productSides[sides.selected.value];
-    let sidesPrice = ((getProduct4_Size() * sides.price) * printingCost.dp)
-    document.getElementById('product-4-sides').addEventListener('change', product4_Price)
-    return sidesPrice;
-  }
-
-  function getProduct4_Other() {
-    other.selected = theFormProduct.elements['product-4-other'];
-    other.price = productOther[other.selected.value];
-    document.getElementById('product-4-other').addEventListener('change', product4_Price)
-    return other.price;
-  }
-
-  function getProduct4_Crease() {
-    crease.selected = theFormProduct.elements['product-4-crease'];
-    crease.price = productCrease[crease.selected.value];
-    document.getElementById('product-4-crease').addEventListener('change', product4_Price)
-    return crease.price;
-  }
-
-  function getProduct4_Price() {
-    let productPrice = (((((getProduct4_Size() * getProduct4_Material()) * printingCost.dp) + getProduct4_Sides()) * getProduct4_Count()) +
-      ((getProduct4_Size() * getProduct4_Other()) * getProduct4_Count()) + (getProduct4_Crease() * getProduct4_Count())) * 3.5
-
-      let count = getProduct4_Count()
-      if(count){
-        if (count >= 1 ) {
-          productPrice = productPrice + 10
-          productPrice*= 0.60
-        }
+    //0.5 jest równe 1 klik do formatu A4
+    if (numberEl > 0.5 && numberEl < 1) numberEl = 0.5  //jeśli format jest większy od A4 i mniejszy od A3
+    // if (numberEl > 0.5 && numberEl < 1){
+    //   numberEl = 0.5
+    // }
+    modifier = numberEl * countEl
+    //color 4 + 0
+    if (this.selected.value === this.prodC1) {
+      if (numberEl <= 0.5) {
+        price = priceDigitalPrint.SRA3_colorOneSided * modifier
+      } else if (numberEl > 0.5) {
+        price = priceDigitalPrint.SRA3_colorOneSided * countEl
       }
-
-    document.querySelector('.product-4-price span').textContent = productPrice.toFixed(2)
-  }
-  return getProduct4_Price()
-}
-
-function product5_Price() {
-  theFormProduct = document.forms['product-5'];
-
-  function getProduct5_Count() {
-    count = parseInt(document.getElementById('product-5-count').value);
-    document.getElementById('product-5-count').addEventListener('change', product5_Price)
-    return count
-  }
-
-  function getProduct5_Pages() {
-    material.selected = theFormProduct.elements['product-5-material'];
-    // material.price = productMaterial[material.selected.value];
-    document.getElementById('product-5-pages').addEventListener('change', product5_Price)
-    count = parseInt(document.getElementById('product-5-pages').value);
-    if (count % 4 != 0) {
-      return
     }
-    let pagePrice = (((getProduct5_Size() * getProduct5_Material() * getProduct5_Inner()) * printingCost.dp) * count) -
-      ((getProduct5_Size() * (getProduct5_Material() / 2) * getProduct5_Inner()) * count)
-    return pagePrice
-  }
-
-  function getProduct5_Size() {
-    size.selected = theFormProduct.elements['product-5-size'];
-    size.price = productSize[size.selected.value];
-    document.getElementById('product-5-size').addEventListener('change', product5_Price)
-    return size.price
-  }
-
-  function getProduct5_Material() {
-    material.selected = theFormProduct.elements['product-5-material'];
-    material.price = productMaterial[material.selected.value];
-    document.getElementById('product-5-material').addEventListener('change', product5_Price)
-    return material.price
-  }
-
-  function getProduct5_Cover() {
-    cover.selected = theFormProduct.elements['product-5-cover'];
-    cover.price = productCover[cover.selected.value];
-    document.getElementById('product-5-cover').addEventListener('change', product5_Price)
-    return cover.price * 2;
-  }
-
-  function getProduct5_Other() {
-    other.selected = theFormProduct.elements['product-5-other'];
-    other.price = productOther[other.selected.value];
-    document.getElementById('product-5-other').addEventListener('change', product5_Price)
-    return other.price * 2;
-  }
-
-  function getProduct5_Binding() {
-    binding.selected = theFormProduct.elements['product-5-binding'];
-    binding.price = productBinding[binding.selected.value];
-    document.getElementById('product-5-binding').addEventListener('change', product5_Price)
-    return binding.price;
-  }
-
-  function getProduct5_Inner() {
-    inner.selected = theFormProduct.elements['product-5-inner'];
-    inner.price = productInner[inner.selected.value];
-    document.getElementById('product-5-inner').addEventListener('change', product5_Price)
-    return inner.price;
-  }
-
-  function getProduct5_Price() {
-    let productPrice = ((((((getProduct5_Size() * getProduct5_Material() * getProduct5_Inner()) * printingCost.dp) + (getProduct5_Pages() / 1.4)) +
-        ((getProduct5_Cover() * getProduct5_Size()) * printingCost.dp) + (getProduct5_Other() * getProduct5_Size())) * getProduct5_Count()) +
-      (getProduct5_Binding() * getProduct5_Count())) * 3
-
-      let count = getProduct5_Count()
-      if(count){
-        if (count >= 1 ) {
-          productPrice = productPrice + 10
-          productPrice*= 0.50
-        }
+    //color 4 + 1
+    else if (this.selected.value === this.prodC2) {
+      if (numberEl <= 0.5) {
+        price = priceDigitalPrint.SRA3_colorAndBlack * modifier
+      } else if (numberEl > 0.5) {
+        price = priceDigitalPrint.SRA3_colorAndBlack * countEl
       }
-    document.querySelector('.product-5-price span').textContent = productPrice.toFixed(2)
+    }
+    //color 4 + 4
+    else if (this.selected.value === this.prodC3) {
+      if (numberEl <= 0.5) {
+        price = priceDigitalPrint.SRA3_colorAndColor * modifier
+      } else if (numberEl > 0.5) {
+        price = priceDigitalPrint.SRA3_colorAndColor * countEl
+      }
+    }
+    //color 1 + 0
+    else if (this.selected.value === this.prodC4) {
+      if (numberEl <= 0.5) {
+        price = priceDigitalPrint.SRA3_blackOneSided * modifier
+      } else if (numberEl > 0.5) {
+        price = priceDigitalPrint.SRA3_blackOneSided * countEl
+      }
+    }
+    //color 1 + 1
+    else if (this.selected.value === this.prodC5) {
+      if (numberEl <= 0.5) {
+        price = priceDigitalPrint.SRA3_blackAndBlack * modifier
+      } else if (numberEl > 0.5) {
+        price = priceDigitalPrint.SRA3_blackAndBlack * countEl
+      }
+    }
+    //black 1 + 0 
+    else if (this.selected.value === this.prodC6) {
+      if (numberEl <= 0.5) {
+        price = priceDigitalPrint.SRA3_blackOneSidedBlack * modifier
+      } else if (numberEl > 0.5) {
+        price = priceDigitalPrint.SRA3_blackOneSidedBlack * countEl
+      }
+    }
+    //black 1 + 1
+    else if (this.selected.value === this.prodC7) {
+      if (numberEl < 0.5) {
+        price = priceDigitalPrint.SRA3_blackDubleSideBlack * modifier
+      } else if (numberEl > 0.5) {
+        price = priceDigitalPrint.SRA3_blackDubleSideBlack * countEl
+      }
+    }
+     else {
+      price = 0
+    }
+    // console.log(modifier)
+    return price
   }
-  return getProduct5_Price()
+
 }
 
-function product6_Price() {
-  theFormProduct = document.forms['product-6'];
-
-  function getProduct6_Count() {
-    count = parseInt(document.getElementById('product-6-count').value);
-    document.getElementById('product-6-count').addEventListener('change', product6_Price)
-    return count
+class DigitalInnerPrint {
+  constructor(product, pages, black, color, empty) {
+    this.pages = document.getElementById(pages)
+    this.pagesBlack = document.getElementById(black)
+    this.pagesColor = document.getElementById(color)
+    this.pagesEmpty = document.getElementById(empty)
+    this.theProductForm = document.forms[product]
+    // this.selected = this.theProductForm.elements[selectForm]
   }
 
-  function getProduct6_Size() {
-    size.selected = theFormProduct.elements['product-6-size'];
-    size.price = productSize[size.selected.value];
-    document.getElementById('product-6-size').addEventListener('change', product6_Price)
-    return size.price
-  }
+  getProduct_Price(countEl, sizeEl, materialEl) {
+    let price
+    let count = parseInt(this.pages.value)
+    let countColor = parseInt(this.pagesColor.value)
+    let countEmpty = parseInt(this.pagesEmpty.value)
+    let countBlack = count - countColor - countEmpty
+    this.pagesBlack.value = countBlack
+    let priceBlack = 0
+    let priceColor = 0
+    let numberEl = sizeEl / size.a4
+    // let format = (count * sizeEl)
 
-  function getProduct6_Material() {
-    material.selected = theFormProduct.elements['product-6-material'];
-    material.price = productMaterial[material.selected.value];
-    document.getElementById('product-6-material').addEventListener('change', product6_Price)
-    return material.price
-  }
+    if (numberEl > 0.5 && numberEl < 1) numberEl = 0.5
+    if (numberEl > 0 && numberEl < 0.5) numberEl = 0.25
 
-  function getProduct6_Sides() {
-    sides.selected = theFormProduct.elements['product-6-sides'];
-    sides.price = productSides[sides.selected.value];
-    let sidesPrice = ((getProduct6_Size() * sides.price) * printingCost.dp)
-    document.getElementById('product-6-sides').addEventListener('change', product6_Price)
-    return sidesPrice;
-  }
+    let modifierBlack = countBlack * numberEl
+    let modifierColor = countColor * numberEl
 
-  function getProduct6_Other() {
-    other.selected = theFormProduct.elements['product-6-other'];
-    other.price = productOther[other.selected.value];
-    document.getElementById('product-6-other').addEventListener('change', product6_Price)
-    return other.price;
-  }
+    if (countEl > 0) {
+        //warunki druku
+        this.pagesEmpty.max = count
+        this.pagesColor.max = count
 
-  function getProduct6_Crease() {
-    crease.selected = theFormProduct.elements['product-6-crease'];
-    crease.price = productCrease[crease.selected.value];
-    document.getElementById('product-6-crease').addEventListener('change', product6_Price)
-    return crease.price;
-  }
-
-  function getProduct6_Price() {
-    let productPrice = (((((getProduct6_Size() * getProduct6_Material()) * printingCost.dp) + getProduct6_Sides()) * getProduct6_Count()) +
-      ((getProduct6_Size() * getProduct6_Other()) * getProduct6_Count()) + (getProduct6_Crease() * getProduct6_Count())) * 3.5
-
-      let count = getProduct6_Count()
-      if(count){
-        if (count >= 1 ) {
-          productPrice = productPrice + 10
-          productPrice*= 0.60
+        if (numberEl >= 1) {
+          priceBlack = priceDigitalPrint.A4_blackOneSide * countBlack
+          priceColor = (priceDigitalPrint.SRA3_colorOneSided / 2) * countColor
+        } 
+        else if (numberEl < 1) {
+          priceBlack = priceDigitalPrint.A4_blackOneSide * modifierBlack
+          priceColor = (priceDigitalPrint.SRA3_colorOneSided / 2) * modifierColor
         }
-      }
 
-    document.querySelector('.product-6-price span').textContent = productPrice.toFixed(2)
+        //warunki ilości
+        if(count > 0){
+          this.pagesColor.disabled = false
+          this.pagesEmpty.disabled = false
+          if(countColor >= count){
+            this.pagesColor.value = count - countEmpty
+            countColor = this.pagesColor.value
+            this.pagesEmpty.disabled = true
+            this.pagesBlack.value = 0
+            countBlack = 0
+
+          }
+          else if(countEmpty >= count){
+            this.pagesEmpty.value = count - countColor
+            countEmpty = this.pagesEmpty.value
+            this.pagesColor.disabled = true
+            this.pagesBlack.value = 0
+            countBlack = 0
+          }
+          else if(countColor > count || countEmpty > count || countColor + countEmpty > count) return;
+          
+        }
+        else{
+          this.pagesColor.disabled = true
+          this.pagesEmpty.disabled = true
+          this.pagesBlack.value = 0
+          this.pagesColor.value = 0
+          this.pagesEmpty.value = 0
+          priceBlack = 0
+          priceColor = 0
+        }
+    } 
+    // modificator(productSheets) * ( y * size) = price
+    let sheets = 0.4346
+    price =  ((((materialEl * sizeEl) * sheets) / 2) * count) + priceBlack + priceColor
+    return price
   }
-  return getProduct6_Price()
 }
 
-function product7_Price() {
-  theFormProduct = document.forms['product-7'];
-
-  function getProduct7_Count() {
-    count = parseInt(document.getElementById('product-7-count').value);
-    document.getElementById('product-7-count').addEventListener('change', product7_Price)
+class CardProduct {
+  constructor() {
+    this.theFormProduct1 = document.forms['product-1'];
+    this.print = new DigitalPrint('product-1', 'product-1-print', 'product-1-c1', 'product-1-c2', 'product-1-c3', 'product-1-c4', 'product-1-c5')
+    this.foil = new Foil('product-1', 'product-1-foil', 'product-1-d1', 'product-1-d2', 'product-1-d3', 'product-1-d4', 'product-1-d5', 'product-1-d6', 'product-1-d7')
+    this.count = document.getElementById('product-1-count').addEventListener('change', this.getProduct_Price.bind(this))
+    this.size = document.getElementById('product-1-size').addEventListener('change', this.getProduct_Price.bind(this))
+    this.material = document.getElementById('product-1-material').addEventListener('change', this.getProduct_Price.bind(this))
+    this.corners = document.getElementById('product-1-corners').addEventListener('click', this.getProduct_Price.bind(this))
+    this.printPrice = document.getElementById('product-1-print').addEventListener('change', this.getProduct_Price.bind(this));
+    this.foilPrice = document.getElementById('product-1-foil').addEventListener('change', this.getProduct_Price.bind(this));
+    this.result = document.querySelector('.product-1-price span')
+    this.getProduct_Price()
+  }
+  getProduct_Count() {
+    let count = parseInt(document.getElementById('product-1-count').value);
     return count
   }
-
-  function getProduct7_Size() {
-    size.selected = theFormProduct.elements['product-7-size'];
-    size.price = productSize[size.selected.value];
-    document.getElementById('product-7-size').addEventListener('change', product7_Price)
-    return size.price
+  getProduct_Size() {
+    let selected = this.theFormProduct1.elements['product-1-size'];
+    let price = productSize[selected.value];
+    return price
+  }
+  getProduct_Material() {
+    let selected = this.theFormProduct1.elements['product-1-material'];
+    let price = productMaterial[selected.value];
+    return price
   }
 
-  function getProduct7_Material() {
-    material.selected = theFormProduct.elements['product-7-material'];
-    material.price = productMaterial[material.selected.value];
-    document.getElementById('product-7-material').addEventListener('change', product7_Price)
-    return material.price
-  }
-
-  function getProduct7_Sides() {
-    sides.selected = theFormProduct.elements['product-7-sides'];
-    sides.price = productSides[sides.selected.value];
-    let sidesPrice = ((getProduct7_Size() * sides.price) * printingCost.dp)
-    document.getElementById('product-7-sides').addEventListener('change', product7_Price)
-    return sidesPrice;
-  }
-
-  function getProduct7_Other() {
-    other.selected = theFormProduct.elements['product-7-other'];
-    other.price = productOther[other.selected.value];
-    document.getElementById('product-7-other').addEventListener('change', product7_Price)
-    return other.price;
-  }
-
-  function getProduct7_Accessories() {
-    accessories.selected = theFormProduct.elements['product-7-leash'];
-    accessories.price = productAccessories[accessories.selected.value];
-    document.getElementById('product-7-leash').addEventListener('change', product7_Price)
-    return accessories.price
-  }
-
-  function getProductCorners() {
+  getCardCorners() {
     let cornersPrice = 0;
-    const selectedProduct = theFormProduct.elements["product-7-corners"];
-    document.getElementById('product-7-corners').addEventListener('click', product7_Price)
-    if (selectedProduct.checked == true) {
-      cornersPrice = 0.2;
+    const selectedCorners = this.theFormProduct1.elements["product-1-corners"];
+    if (selectedCorners.checked == true) {
+      cornersPrice = 0.01;
     } else {
       cornersPrice = 0;
     }
     return cornersPrice;
   }
 
-  function getProduct7_Price() {
-    let productPrice = (((((getProduct7_Size() * getProduct7_Material()) *
-        printingCost.dp) + getProduct7_Sides()) * getProduct7_Count()) +
-      ((getProduct7_Size() * getProduct7_Other()) * getProduct7_Count()) +
-      (getProduct7_Accessories() * getProduct7_Count()) + (getProductCorners() * getProduct7_Count())) * 3.5
+  getProduct_Price() {
+    let count = this.getProduct_Count()
+    let sizeProd = this.getProduct_Size()
+    let materialProd = this.getProduct_Material()
+    let cornersProd = this.getCardCorners()
+    let printProd = this.print.getPricePrint(count, sizeProd)
+    let foilProd = this.foil.getPriceFoil(count, sizeProd)
 
-      let count = getProduct7_Count()
-      if(count){
-        if (count >= 1 ) {
-          productPrice = productPrice + 10
-          productPrice*= 0.60
-        }
-      }
-    document.querySelector('.product-7-price span').textContent = productPrice.toFixed(2)
+    let productPrice = (((sizeProd * materialProd) + cornersProd) * count) + printProd + foilProd;
+    if(productPrice){
+      let price =  (priceCondition(count, productPrice) * 2) //exception
+      this.result.textContent = price.toFixed(2)
+    }
   }
-  return getProduct7_Price()
-
 }
 
-function product8_Price() {
-  theFormProduct = document.forms['product-8'];
-
-  function getProduct8_Count() {
-    count = parseInt(document.getElementById('product-8-count').value);
-    document.getElementById('product-8-count').addEventListener('change', product8_Price)
+class Envelope {
+  constructor() {
+    this.theFormProduct2 = document.forms['product-2'];
+    this.print = new DigitalPrint('product-2', 'product-2-print', 'product-2-c1', 'product-2-c2', 'product-2-c3', 'product-2-c4', 'product-2-c5')
+    this.count = document.getElementById('product-2-count').addEventListener('change', this.getProduct_Price.bind(this))
+    this.size = document.getElementById('product-2-size').addEventListener('change', this.getProduct_Price.bind(this))
+    this.material = document.getElementById('product-2-material').addEventListener('change', this.getProduct_Price.bind(this))
+    this.printPrice = document.getElementById('product-2-print').addEventListener('change', this.getProduct_Price.bind(this));
+    this.result = document.querySelector('.product-2-price span')
+    this.getProduct_Price()
+  }
+  getProduct_Count() {
+    let count = parseInt(document.getElementById('product-2-count').value);
     return count
   }
-
-  function getProduct8_Size() {
-    size.selected = theFormProduct.elements['product-8-size'];
-    size.price = productSize[size.selected.value];
-    document.getElementById('product-8-size').addEventListener('change', product8_Price)
-    return size.price
+  getProduct_Size() {
+    let selected = this.theFormProduct2.elements['product-2-size'];
+    let price = productSize[selected.value];
+    return price
   }
-
-  function getProduct8_Material() {
-    material.selected = theFormProduct.elements['product-8-material'];
-    material.price = productMaterial[material.selected.value];
-    document.getElementById('product-8-material').addEventListener('change', product8_Price)
-    return material.price
+  getProduct_Material() {
+    let selected = this.theFormProduct2.elements['product-2-material'];
+    let price = productMaterial[selected.value];
+    return price
   }
+  getProduct_Price() {
+    let count = this.getProduct_Count()
+    let sizeProd = this.getProduct_Size()
+    let materialProd = this.getProduct_Material()
+    let printProd = this.print.getPricePrint(count, sizeProd)
 
-  function getProduct8_Sides() {
-    sides.selected = theFormProduct.elements['product-8-sides'];
-    sides.price = productSides[sides.selected.value];
-    let sidesPrice = ((getProduct8_Size() * sides.price) * printingCost.dp)
-    document.getElementById('product-8-sides').addEventListener('change', product8_Price)
-    return sidesPrice;
+    let productPrice = ((sizeProd * materialProd) * count) + printProd;
+    if(productPrice){
+      let price =  priceCondition(count, productPrice)
+      this.result.textContent = price.toFixed(2)
+    }
   }
-
-  function getProduct8_Other() {
-    other.selected = theFormProduct.elements['product-8-other'];
-    other.price = productOther[other.selected.value];
-    document.getElementById('product-8-other').addEventListener('change', product8_Price)
-    return other.price;
-  }
-
-  function getProduct8_Binding() {
-    binding.selected = theFormProduct.elements['product-8-binding'];
-    binding.price = productBinding[binding.selected.value];
-    document.getElementById('product-8-binding').addEventListener('change', product8_Price)
-    return binding.price;
-  }
-
-  function getProduct8_Price() {
-    const pages = 8  //pages in calendar * print
-    let productPrice = ((((((getProduct8_Size() * getProduct8_Material()) * printingCost.dp) + getProduct8_Sides()) + pages) * getProduct8_Count()) +
-      ((getProduct8_Size() * getProduct8_Other()) * getProduct8_Count()) + (getProduct8_Binding() * getProduct8_Count())) * 3.5
-
-      let count = getProduct8_Count()
-      if(count){
-        if (count >= 1 ) {
-          productPrice = productPrice + 10
-          productPrice*= 0.60
-        }
-      }
-    document.querySelector('.product-8-price span').textContent = productPrice.toFixed(2)
-  }
-  return getProduct8_Price()
-
 }
 
-function product9_Price() {
-  theFormProduct = document.forms['product-9'];
-
-  function getProduct9_Count() {
-    count = parseInt(document.getElementById('product-9-count').value);
-    document.getElementById('product-9-count').addEventListener('change', product9_Price)
+class LeafletProduct {
+  constructor() {
+    this.theFormProduct3 = document.forms['product-3'];
+    this.print = new DigitalPrint('product-3', 'product-3-print', 'product-3-c1', 'product-3-c2', 'product-3-c3', 'product-3-c4', 'product-3-c5')
+    this.foil = new Foil('product-3', 'product-3-foil', 'product-3-d1', 'product-3-d2', 'product-3-d3', 'product-3-d4', 'product-3-d5', 'product-3-d6', 'product-3-d7')
+    this.count = document.getElementById('product-3-count').addEventListener('change', this.getProduct_Price.bind(this))
+    this.size = document.getElementById('product-3-size').addEventListener('change', this.getProduct_Price.bind(this))
+    this.material = document.getElementById('product-3-material').addEventListener('change', this.getProduct_Price.bind(this))
+    this.crease = document.getElementById('product-3-crease').addEventListener('change', this.getProduct_Price.bind(this))
+    this.printPrice = document.getElementById('product-3-print').addEventListener('change', this.getProduct_Price.bind(this));
+    this.foilPrice = document.getElementById('product-3-foil').addEventListener('change', this.getProduct_Price.bind(this));
+    this.result = document.querySelector('.product-3-price span')
+    this.getProduct_Price()
+    // this.refreshPage()
+  }
+  getProduct_Count() {
+    let count = parseInt(document.getElementById('product-3-count').value);
     return count
   }
-
-  function getProduct9_Pages() {
-    count = parseInt(document.getElementById('product-9-pages').value);
-    document.getElementById('product-9-pages').addEventListener('change', product9_Price)
-    return (((getProduct9_Size() * getProduct9_Material() * getProduct9_Inner()) * printingCost.dp) * count) -
-      ((getProduct9_Size() * (getProduct9_Material() / 2) * getProduct9_Inner()) * count)
+  getProduct_Size() {
+    let selected = this.theFormProduct3.elements['product-3-size'];
+    let price = productSize[selected.value];
+    return price
   }
-
-  function getProduct9_Size() {
-    size.selected = theFormProduct.elements['product-9-size'];
-    size.price = productSize[size.selected.value];
-    document.getElementById('product-9-size').addEventListener('change', product9_Price)
-    return size.price
+  getProduct_Material() {
+    let selected = this.theFormProduct3.elements['product-3-material'];
+    let price = productMaterial[selected.value];
+    return price
   }
-
-  function getProduct9_Material() {
-    material.selected = theFormProduct.elements['product-9-material'];
-    material.price = productMaterial[material.selected.value];
-    document.getElementById('product-9-material').addEventListener('change', product9_Price)
-    return material.price
+  getProduct_Crease() {
+    let selected = this.theFormProduct3.elements['product-3-crease'];
+    let price = productCrease[selected.value];
+    return price;
   }
+  getProduct_Price() {
+    let count = this.getProduct_Count()
+    let sizeProd = this.getProduct_Size()
+    let materialProd = this.getProduct_Material()
+    let creaseProd = this.getProduct_Crease()
+    let printProd = this.print.getPricePrint(count, sizeProd)
+    let foilProd = this.foil.getPriceFoil(count, sizeProd)
+    let productPrice = (((sizeProd * materialProd) + creaseProd) * count) + printProd + foilProd;
 
-  function getProduct9_Cover() {
-    cover.selected = theFormProduct.elements['product-9-cover'];
-    cover.price = productCover[cover.selected.value];
-    document.getElementById('product-9-cover').addEventListener('change', product9_Price)
-    return cover.price * 2
+    if(productPrice){
+      let price =  priceCondition(count, productPrice)
+      this.result.textContent = price.toFixed(2)
+    }
   }
-
-  function getProduct9_Other() {
-    other.selected = theFormProduct.elements['product-9-other'];
-    other.price = productOther[other.selected.value];
-    document.getElementById('product-9-other').addEventListener('change', product9_Price)
-    return other.price * 2
+  refreshPage(){
+    let result = 0.104
+    const reset = document.querySelectorAll('.reset')
+    reset.forEach(res=>res.addEventListener('click', ()=> this.result.textContent = result.toFixed(3)))
   }
-
-  function getProduct9_Binding() {
-    binding.selected = theFormProduct.elements['product-9-binding'];
-    binding.price = productBinding[binding.selected.value];
-    document.getElementById('product-9-binding').addEventListener('change', product9_Price)
-    return binding.price
-  }
-
-  function getProduct9_Inner() {
-    inner.selected = theFormProduct.elements['product-9-inner'];
-    inner.price = productInner[inner.selected.value];
-    document.getElementById('product-9-inner').addEventListener('change', product9_Price)
-    return inner.price
-  }
-
-  function getProduct9_Price() {
-    let productPrice = ((((((getProduct9_Size() * getProduct9_Material() * getProduct9_Inner()) * printingCost.dp) + (getProduct9_Pages() / 1.4)) +
-        ((getProduct9_Cover() * getProduct9_Size()) * printingCost.dp) + (getProduct9_Other() * getProduct9_Size())) * getProduct9_Count()) +
-      (getProduct9_Binding() * getProduct9_Count())) * 1.73
-
-      let count = getProduct9_Count()
-      if(count){
-        if (count >= 1 ) {
-          productPrice = productPrice + 10
-          productPrice*= 0.60
-        }
-      }
-    document.querySelector('.product-9-price span').textContent = productPrice.toFixed(2)
-  }
-  return getProduct9_Price()
 }
 
-function product10_Price() {
-  theFormProduct = document.forms['product-10'];
-
-  function getProduct10_Count() {
-    count = parseInt(document.getElementById('product-10-count').value);
-    document.getElementById('product-10-count').addEventListener('change', product10_Price)
+class Invitation {
+  constructor() {
+    this.theFormProduct4 = document.forms['product-4'];
+    this.print = new DigitalPrint('product-4', 'product-4-print', 'product-4-c1', 'product-4-c2', 'product-4-c3', 'product-4-c4', 'product-4-c5')
+    this.foil = new Foil('product-4', 'product-4-foil', 'product-4-d1', 'product-4-d2', 'product-4-d3', 'product-4-d4', 'product-4-d5', 'product-4-d6', 'product-4-d7')
+    this.count = document.getElementById('product-4-count').addEventListener('change', this.getProduct_Price.bind(this))
+    this.size = document.getElementById('product-4-size').addEventListener('change', this.getProduct_Price.bind(this))
+    this.material = document.getElementById('product-4-material').addEventListener('change', this.getProduct_Price.bind(this))
+    this.crease = document.getElementById('product-4-crease').addEventListener('change', this.getProduct_Price.bind(this))
+    this.printPrice = document.getElementById('product-4-print').addEventListener('change', this.getProduct_Price.bind(this));
+    this.foilPrice = document.getElementById('product-4-foil').addEventListener('change', this.getProduct_Price.bind(this));
+    this.result = document.querySelector('.product-4-price span')
+    this.getProduct_Price()
+  }
+  getProduct_Count() {
+    let count = parseInt(document.getElementById('product-4-count').value);
     return count
   }
-
-  function getProduct10_Size() {
-    size.selected = theFormProduct.elements['product-10-size'];
-    size.price = productSize[size.selected.value];
-    document.getElementById('product-10-size').addEventListener('change', product10_Price)
-    return size.price
+  getProduct_Size() {
+    let selected = this.theFormProduct4.elements['product-4-size'];
+    let price = productSize[selected.value];
+    return price
   }
-
-  function getProduct10_Material() {
-    material.selected = theFormProduct.elements['product-10-material'];
-    material.price = productMaterial[material.selected.value];
-    document.getElementById('product-10-material').addEventListener('change', product10_Price)
-    return material.price
+  getProduct_Material() {
+    let selected = this.theFormProduct4.elements['product-4-material'];
+    let price = productMaterial[selected.value];
+    return price
   }
-
-  function getProduct10_Sides() {
-    sides.selected = theFormProduct.elements['product-10-sides'];
-    sides.price = productSides[sides.selected.value];
-    let sidesPrice = ((getProduct10_Size() * sides.price) * printingCost.dp)
-    document.getElementById('product-10-sides').addEventListener('change', product10_Price)
-    return sidesPrice;
+  getProduct_Crease() {
+    let selected = this.theFormProduct4.elements['product-4-crease'];
+    let price = productCrease[selected.value];
+    return price;
   }
+  getProduct_Price() {
+    let count = this.getProduct_Count()
+    let sizeProd = this.getProduct_Size()
+    let materialProd = this.getProduct_Material()
+    let creaseProd = this.getProduct_Crease()
+    let printProd = this.print.getPricePrint(count, sizeProd)
+    let foilProd = this.foil.getPriceFoil(count, sizeProd)
 
-  function getProduct10_Other() {
-    other.selected = theFormProduct.elements['product-10-other'];
-    other.price = productOther[other.selected.value];
-    document.getElementById('product-10-other').addEventListener('change', product10_Price)
-    return other.price
+    let productPrice = (((sizeProd * materialProd) + creaseProd) * count) + printProd + foilProd;
+    if(productPrice){
+      let price =  priceCondition(count, productPrice)
+      this.result.textContent = price.toFixed(2)
+    }
   }
-
-  function getProduct10_Price() {
-    let productPrice = (((((getProduct10_Size() * getProduct10_Material()) *
-        printingCost.dp) + getProduct10_Sides()) * getProduct10_Count()) +
-      ((getProduct10_Size() * getProduct10_Other()) * getProduct10_Count())) * 3.5
-
-      let count = getProduct10_Count()
-      if(count){
-        if (count >= 1 ) {
-          productPrice = productPrice + 10
-          productPrice*= 0.60
-        }
-      }
-    document.querySelector('.product-10-price span').textContent = productPrice.toFixed(2)
-  }
-  return getProduct10_Price()
 }
 
-function product11_Price() {
-  theFormProduct = document.forms['product-11'];
+class Brochures {
+  constructor() {
+    this.theFormProduct5 = document.forms['product-5'];
+    this.innerPrint = new DigitalInnerPrint('product-5', 'product-5-pages-count', 'product-5-pages-black', 'product-5-pages-color', 'product-5-pages-empty')
+    this.print = new DigitalPrint('product-5', 'product-5-print', 'product-5-c1', 'product-5-c2', 'product-5-c3', 'product-5-c4', 'product-5-c5', 'product-5-c6')
+    this.foil = new Foil('product-5', 'product-5-foil', 'product-5-d1', 'product-5-d2', 'product-5-d3', 'product-5-d4', 'product-5-d5', 'product-5-d6', 'product-5-d7')
 
-  function getProduct11_Count() {
-    count = parseInt(document.getElementById('product-11-count').value);
-    document.getElementById('product-11-count').addEventListener('change', product11_Price)
+    this.pages = document.getElementById('product-5-pages-count').addEventListener('change', this.getProduct_Price.bind(this));
+    this.pagesBlack = document.getElementById('product-5-pages-black').addEventListener('change', this.getProduct_Price.bind(this));
+    this.pagesColor = document.getElementById('product-5-pages-color').addEventListener('change', this.getProduct_Price.bind(this));
+    this.pagesEmpty = document.getElementById('product-5-pages-empty').addEventListener('change', this.getProduct_Price.bind(this));
+
+    this.count = document.getElementById('product-5-count').addEventListener('change', this.getProduct_Price.bind(this))
+    this.size = document.getElementById('product-5-size').addEventListener('change', this.getProduct_Price.bind(this))
+    this.material = document.getElementById('product-5-material').addEventListener('change', this.getProduct_Price.bind(this))
+    this.cover = document.getElementById('product-5-cover').addEventListener('change', this.getProduct_Price.bind(this))
+    this.printPrice = document.getElementById('product-5-print').addEventListener('change', this.getProduct_Price.bind(this));
+    this.foilPrice = document.getElementById('product-5-foil').addEventListener('change', this.getProduct_Price.bind(this))
+    this.binding = document.getElementById('product-5-binding').addEventListener('change', this.getProduct_Price.bind(this))
+
+    this.result = document.querySelector('.product-5-price span')
+    this.getProduct_Price()
+  }
+  getProduct_Count() {
+    let count = parseInt(document.getElementById('product-5-count').value);
     return count
   }
-
-  function getProduct11_Pages() {
-    count = parseInt(document.getElementById('product-11-pages').value);
-    document.getElementById('product-11-pages').addEventListener('change', product11_Price)
-    return (((getProduct11_Size() * getProduct11_Material() * getProduct11_Inner()) * printingCost.dp) * count) -
-      ((getProduct11_Size() * (getProduct11_Material() / 2) * getProduct11_Inner()) * count)
+  getProduct_Size() {
+    let selected = this.theFormProduct5.elements['product-5-size'];
+    let price = productSize[selected.value];
+    console.log()
+    return price
+  }
+  getProduct_Material() {
+    let selected = this.theFormProduct5.elements['product-5-material'];
+    let price = productMaterial[selected.value];
+    return price
+  }
+  getProduct_Cover() {
+    let selected = this.theFormProduct5.elements['product-5-cover'];
+    let price = productCover[selected.value];
+    return price
+  }
+  getProduct_Binding() {
+    let selected = this.theFormProduct5.elements['product-5-binding'];
+    let price = productBinding[selected.value];
+    return price
   }
 
-  function getProduct11_Size() {
-    size.selected = theFormProduct.elements['product-11-size'];
-    size.price = productSize[size.selected.value];
-    document.getElementById('product-11-size').addEventListener('change', product11_Price)
-    return size.price
+  getProduct_Price() {
+    let count = this.getProduct_Count()
+    let sizeProd = this.getProduct_Size()
+    let materialProd = this.getProduct_Material()
+    let coverMaterial = this.getProduct_Cover()
+    let binding = this.getProduct_Binding()
+    let printCover = this.print.getPricePrint(count, (sizeProd * 2))
+    let foilProd = this.foil.getPriceFoil(count, (sizeProd * 2))
+    let innerPrint = this.innerPrint.getProduct_Price(count, sizeProd, materialProd)
+
+    let productPrice =((((sizeProd * 2) * coverMaterial) + innerPrint + binding) * count) + foilProd + printCover
+    if(productPrice){
+      let price =  priceCondition(count, productPrice)
+      this.result.textContent = price.toFixed(2)
+    }
   }
 
-  function getProduct11_Material() {
-    material.selected = theFormProduct.elements['product-11-material'];
-    material.price = productMaterial[material.selected.value];
-    document.getElementById('product-11-material').addEventListener('change', product11_Price)
-    return material.price
-  }
-
-  function getProduct11_Cover() {
-    cover.selected = theFormProduct.elements['product-11-cover'];
-    cover.price = productCover[cover.selected.value];
-    document.getElementById('product-11-cover').addEventListener('change', product11_Price)
-    return cover.price * 2
-  }
-
-  function getProduct11_Other() {
-    other.selected = theFormProduct.elements['product-11-other'];
-    other.price = productOther[other.selected.value];
-    document.getElementById('product-11-other').addEventListener('change', product11_Price)
-    return other.price * 2
-  }
-
-  function getProduct11_Binding() {
-    binding.selected = theFormProduct.elements['product-11-binding'];
-    binding.price = productBinding[binding.selected.value];
-    document.getElementById('product-11-binding').addEventListener('change', product11_Price)
-    return binding.price
-  }
-
-  function getProduct11_Inner() {
-    inner.selected = theFormProduct.elements['product-11-inner'];
-    inner.price = productInner[inner.selected.value];
-    document.getElementById('product-11-inner').addEventListener('change', product11_Price)
-    return inner.price
-  }
-
-  function getProduct11_Price() {
-    let productPrice = ((((((getProduct11_Size() * getProduct11_Material() * getProduct11_Inner()) * printingCost.dp) + (getProduct11_Pages() / 1.4)) +
-        ((getProduct11_Cover() * getProduct11_Size()) * printingCost.dp) + (getProduct11_Other() * getProduct11_Size())) * getProduct11_Count()) +
-      (getProduct11_Binding() * getProduct11_Count())) * 1.23
-
-      let count = getProduct11_Count()
-      if(count){
-        if (count >= 1 ) {
-          productPrice = productPrice + 10
-          productPrice*= 0.60
-        }
-      }
-    document.querySelector('.product-11-price span').textContent = productPrice.toFixed(2)
-  }
-  return getProduct11_Price()
 }
 
-function product12_Price() {
-  theFormProduct = document.forms['product-12'];
-
-  function getProduct12_Count() {
-    count = parseInt(document.getElementById('product-12-count').value);
-    document.getElementById('product-12-count').addEventListener('change', product12_Price)
+class Menu {
+  constructor() {
+    this.theFormProduct6 = document.forms['product-6'];
+    this.print = new DigitalPrint('product-6', 'product-6-print', 'product-6-c1', 'product-6-c2', 'product-6-c3', 'product-6-c4', 'product-6-c5')
+    this.foil = new Foil('product-6', 'product-6-foil', 'product-6-d1', 'product-6-d2', 'product-6-d3', 'product-6-d4', 'product-6-d5', 'product-6-d6', 'product-6-d7')
+    this.count = document.getElementById('product-6-count').addEventListener('change', this.getProduct_Price.bind(this))
+    this.size = document.getElementById('product-6-size').addEventListener('change', this.getProduct_Price.bind(this))
+    this.material = document.getElementById('product-6-material').addEventListener('change', this.getProduct_Price.bind(this))
+    this.crease = document.getElementById('product-6-crease').addEventListener('change', this.getProduct_Price.bind(this))
+    this.printPrice = document.getElementById('product-6-print').addEventListener('change', this.getProduct_Price.bind(this));
+    this.foilPrice = document.getElementById('product-6-foil').addEventListener('change', this.getProduct_Price.bind(this));
+    this.result = document.querySelector('.product-6-price span')
+    this.getProduct_Price()
+  }
+  getProduct_Count() {
+    let count = parseInt(document.getElementById('product-6-count').value);
     return count
   }
-
-  function getProduct12_Size() {
-    size.selected = theFormProduct.elements['product-12-size'];
-    size.price = productSize[size.selected.value];
-    document.getElementById('product-12-size').addEventListener('change', product12_Price)
-    return size.price
+  getProduct_Size() {
+    let selected = this.theFormProduct6.elements['product-6-size'];
+    let price = productSize[selected.value];
+    return price
   }
-
-  function getProduct12_Material() {
-    material.selected = theFormProduct.elements['product-12-material'];
-    material.price = productMaterial[material.selected.value];
-    document.getElementById('product-12-material').addEventListener('change', product12_Price)
-    return material.price
+  getProduct_Material() {
+    let selected = this.theFormProduct6.elements['product-6-material'];
+    let price = productMaterial[selected.value];
+    return price
   }
-
-  function getProduct12_Price() {
-    let productPrice = (((getProduct12_Size() * getProduct12_Material()) *
-      (printingCost.dp)) * getProduct12_Count())
-      let count = getProduct12_Count()
-      if(count){
-
-        if (count >= 50 ) {
-          productPrice = productPrice + 29
-          productPrice*= 0.5 
-        }
-      }
-
-    document.querySelector('.product-12-price span').textContent = productPrice.toFixed(2)
+  getProduct_Crease() {
+    let selected = this.theFormProduct6.elements['product-6-crease'];
+    let price = productCrease[selected.value];
+    return price;
   }
-  return getProduct12_Price()
+  getProduct_Price() {
+    let count = this.getProduct_Count()
+    let sizeProd = this.getProduct_Size()
+    let materialProd = this.getProduct_Material()
+    let creaseProd = this.getProduct_Crease()
+    let printProd = this.print.getPricePrint(count, sizeProd)
+    let foilProd = this.foil.getPriceFoil(count, sizeProd)
+
+    let productPrice = (((sizeProd * materialProd) + creaseProd) * count) + printProd + foilProd;
+    if(productPrice){
+      let price =  priceCondition(count, productPrice)
+      this.result.textContent = price.toFixed(2)
+    }
+  }
 }
 
+class Identifiers {
+  constructor() {
+    this.theFormProduct7 = document.forms['product-7'];
+    this.print = new DigitalPrint('product-7', 'product-7-print', 'product-7-c1', 'product-7-c2', 'product-7-c3', 'product-7-c4', 'product-7-c5')
+    this.foil = new Foil('product-7', 'product-7-foil', 'product-7-d1', 'product-7-d2', 'product-7-d3', 'product-7-d4', 'product-7-d5', 'product-7-d6', 'product-7-d7')
+    this.count = document.getElementById('product-7-count').addEventListener('change', this.getProduct_Price.bind(this))
+    this.size = document.getElementById('product-7-size').addEventListener('change', this.getProduct_Price.bind(this))
+    this.material = document.getElementById('product-7-material').addEventListener('change', this.getProduct_Price.bind(this))
+    this.printPrice = document.getElementById('product-7-print').addEventListener('change', this.getProduct_Price.bind(this));
+    this.foilPrice = document.getElementById('product-7-foil').addEventListener('change', this.getProduct_Price.bind(this));
+    this.leash = document.getElementById('product-7-leash').addEventListener('change', this.getProduct_Price.bind(this));
+    this.corners = document.getElementById('product-7-corners').addEventListener('click', this.getProduct_Price.bind(this))
+    this.result = document.querySelector('.product-7-price span')
+    this.getProduct_Price()
+  }
+  getProduct_Count() {
+    let count = parseInt(document.getElementById('product-7-count').value);
+    return count
+  }
+  getProduct_Size() {
+    let selected = this.theFormProduct7.elements['product-7-size'];
+    let price = productSize[selected.value];
+    return price
+  }
+  getProduct_Material() {
+    let selected = this.theFormProduct7.elements['product-7-material'];
+    let price = productMaterial[selected.value];
+    return price
+  }
+  getProduct_Accessories() {
+    let selected = this.theFormProduct7.elements['product-7-leash'];
+    let price = productAccessories[selected.value];
+    return price
+  }
+  getCardCorners() {
+    let cornersPrice = 0;
+    const selectedCorners = this.theFormProduct7.elements["product-7-corners"];
+    if (selectedCorners.checked == true) {
+      cornersPrice = 0.10;
+    } else {
+      cornersPrice = 0;
+    }
+    return cornersPrice;
+  }
+  getProduct_Price() {
+    let count = this.getProduct_Count()
+    let sizeProd = this.getProduct_Size()
+    let materialProd = this.getProduct_Material()
+    let leash = this.getProduct_Accessories()
+    let cornersProd = this.getCardCorners()
+    let printProd = this.print.getPricePrint(count, sizeProd)
+    let foilProd = this.foil.getPriceFoil(count, sizeProd)
+
+    let productPrice = (((sizeProd * materialProd) + leash + cornersProd) * count) + printProd + foilProd;
+    if(productPrice){
+      let price =  priceCondition(count, productPrice)
+      this.result.textContent = price.toFixed(2)
+    }
+  }
+}
+
+class Calendars {
+  constructor() {
+    this.theFormProduct8 = document.forms['product-8'];
+    this.print = new DigitalPrint('product-8', 'product-8-print', 'product-8-c1', 'product-8-c2', 'product-8-c3', 'product-8-c4', 'product-8-c5')
+    this.foil = new Foil('product-8', 'product-8-foil', 'product-8-d1', 'product-8-d2', 'product-8-d3', 'product-8-d4', 'product-8-d5', 'product-8-d6', 'product-8-d7')
+    this.count = document.getElementById('product-8-count').addEventListener('change', this.getProduct_Price.bind(this))
+    this.size = document.getElementById('product-8-size').addEventListener('change', this.getProduct_Price.bind(this))
+    this.material = document.getElementById('product-8-material').addEventListener('change', this.getProduct_Price.bind(this))
+    this.printPrice = document.getElementById('product-8-print').addEventListener('change', this.getProduct_Price.bind(this));
+    this.foilPrice = document.getElementById('product-8-foil').addEventListener('change', this.getProduct_Price.bind(this));
+    this.pendant = document.getElementById('product-8-binding').addEventListener('change', this.getProduct_Price.bind(this));
+    this.result = document.querySelector('.product-8-price span')
+    this.getProduct_Price()
+  }
+  getProduct_Count() {
+    let count = parseInt(document.getElementById('product-8-count').value);
+    return count
+  }
+  getProduct_Size() {
+    let selected = this.theFormProduct8.elements['product-8-size'];
+    let price = productSize[selected.value];
+    return price
+  }
+  getProduct_Material() {
+    let selected = this.theFormProduct8.elements['product-8-material'];
+    let price = productMaterial[selected.value];
+    return price
+  }
+  getProduct_Accessories() {
+    let selected = this.theFormProduct8.elements['product-8-binding'];
+    let price = productBinding[selected.value];
+    return price
+  }
+
+  getProduct_Price() {
+    let count = this.getProduct_Count()
+    let sizeProd = this.getProduct_Size()
+    let materialProd = this.getProduct_Material()
+    let pendant = this.getProduct_Accessories()
+    let printProd = this.print.getPricePrint(count, sizeProd)
+    let foilProd = this.foil.getPriceFoil(count, sizeProd)
+    const pages = 12  //pages in calendar * print
+
+    let productPrice = (((sizeProd * materialProd) * pages) * count) + (printProd * pages) + (foilProd * pages) + (pendant * count);
+    if(productPrice){
+      let price =  priceCondition(count, productPrice)
+      this.result.textContent = price.toFixed(2)
+    }
+  }
+}
+
+class Books {
+  constructor() {
+    this.theFormProduct9 = document.forms['product-9'];
+    this.innerPrint = new DigitalInnerPrint('product-9', 'product-9-pages-count', 'product-9-pages-black', 'product-9-pages-color', 'product-9-pages-empty')
+    this.print = new DigitalPrint('product-9', 'product-9-print', 'product-9-c1', 'product-9-c2', 'product-9-c3', 'product-9-c4', 'product-9-c5', 'product-9-c6')
+    this.foil = new Foil('product-9', 'product-9-foil', 'product-9-d1', 'product-9-d2', 'product-9-d3', 'product-9-d4')
+
+    this.pages = document.getElementById('product-9-pages-count').addEventListener('change', this.getProduct_Price.bind(this));
+    this.pagesBlack = document.getElementById('product-9-pages-black').addEventListener('change', this.getProduct_Price.bind(this));
+    this.pagesColor = document.getElementById('product-9-pages-color').addEventListener('change', this.getProduct_Price.bind(this));
+    this.pagesEmpty = document.getElementById('product-9-pages-empty').addEventListener('change', this.getProduct_Price.bind(this));
+
+    this.count = document.getElementById('product-9-count').addEventListener('change', this.getProduct_Price.bind(this))
+    this.size = document.getElementById('product-9-size').addEventListener('change', this.getProduct_Price.bind(this))
+    this.material = document.getElementById('product-9-material').addEventListener('change', this.getProduct_Price.bind(this))
+    this.cover = document.getElementById('product-9-cover').addEventListener('change', this.getProduct_Price.bind(this))
+    this.printPrice = document.getElementById('product-9-print').addEventListener('change', this.getProduct_Price.bind(this));
+    this.foilPrice = document.getElementById('product-9-foil').addEventListener('change', this.getProduct_Price.bind(this))
+    this.binding = document.getElementById('product-9-binding').addEventListener('change', this.getProduct_Price.bind(this))
+    this.wings = document.getElementById('product-9-wings').addEventListener('click', this.getProduct_Price.bind(this))
+    this.result = document.querySelector('.product-9-price span')
+    this.getProduct_Price()
+  }
+  getProduct_Count() {
+    let count = parseInt(document.getElementById('product-9-count').value);
+    return count
+  }
+  getProduct_Size() {
+    let selected = this.theFormProduct9.elements['product-9-size'];
+    let price = productSize[selected.value];
+    return price
+  }
+  getProduct_Material() {
+    let selected = this.theFormProduct9.elements['product-9-material'];
+    let price = productMaterial[selected.value];
+    return price
+  }
+  getProduct_Cover() {
+    let selected = this.theFormProduct9.elements['product-9-cover'];
+    let price = productCover[selected.value];
+    return price
+  }
+  getProduct_Binding() {
+    let selected = this.theFormProduct9.elements['product-9-binding'];
+    let price = productBinding[selected.value];
+    return price
+  }
+  getProductWings(count, size, material, print, foil) {
+    let price = 0;
+    let selected = this.theFormProduct9.elements['product-9-wings'];
+    if (selected.checked == true && this.getProduct_Cover() > 0) {
+      price = ((size * material) * count ) + print + foil
+    } else {
+      price = 0;
+    }
+    return price;
+  }
+
+  getProduct_Price() {
+    let count = this.getProduct_Count()
+    let sizeProd = this.getProduct_Size()
+    let materialProd = this.getProduct_Material()
+    let coverMaterial = this.getProduct_Cover()
+    let binding = this.getProduct_Binding()
+    let printCover = this.print.getPricePrint(count, (sizeProd * 2))
+    let foilProd = this.foil.getPriceFoil(count, (sizeProd * 2))
+    let innerPrint = this.innerPrint.getProduct_Price(count, sizeProd, materialProd)
+    let wings = this.getProductWings(count, sizeProd, coverMaterial, (printCover / 2), (foilProd / 2))
+
+    let productPrice =((((sizeProd * 2) * coverMaterial) + innerPrint + binding) * count) + foilProd + printCover + wings
+    if(productPrice){
+      let price =  priceCondition(count, productPrice)
+      this.result.textContent = price.toFixed(2)
+    }
+  }
+}
+
+class Folder {
+  constructor() {
+    this.theFormProduct10 = document.forms['product-10'];
+    this.print = new DigitalPrint('product-10', 'product-10-print', 'product-10-c1', 'product-10-c2', 'product-10-c3', 'product-10-c4', 'product-10-c5')
+    this.foil = new Foil('product-10', 'product-10-foil', 'product-10-d1', 'product-10-d2', 'product-10-d3', 'product-10-d4', 'product-10-d5', 'product-10-d6', 'product-10-d7')
+    this.count = document.getElementById('product-10-count').addEventListener('change', this.getProduct_Price.bind(this))
+    this.size = document.getElementById('product-10-size').addEventListener('change', this.getProduct_Price.bind(this))
+    this.material = document.getElementById('product-10-material').addEventListener('change', this.getProduct_Price.bind(this))
+    this.crease = document.getElementById('product-10-crease').addEventListener('change', this.getProduct_Price.bind(this))
+    this.printPrice = document.getElementById('product-10-print').addEventListener('change', this.getProduct_Price.bind(this));
+    this.foilPrice = document.getElementById('product-10-foil').addEventListener('change', this.getProduct_Price.bind(this));
+    this.result = document.querySelector('.product-10-price span')
+    this.getProduct_Price()
+  }
+  getProduct_Count() {
+    let count = parseInt(document.getElementById('product-10-count').value);
+    return count
+  }
+  getProduct_Size() {
+    let selected = this.theFormProduct10.elements['product-10-size'];
+    let price = productSize[selected.value];
+    return price
+  }
+  getProduct_Material() {
+    let selected = this.theFormProduct10.elements['product-10-material'];
+    let price = productMaterial[selected.value];
+    return price
+  }
+  getProduct_Crease() {
+    let selected = this.theFormProduct10.elements['product-10-crease'];
+    let price = productCrease[selected.value];
+    return price;
+  }
+  getProduct_Price() {
+    let count = this.getProduct_Count()
+    let sizeProd = this.getProduct_Size()
+    let materialProd = this.getProduct_Material()
+    let creaseProd = this.getProduct_Crease()
+    let printProd = this.print.getPricePrint(count, sizeProd)
+    let foilProd = this.foil.getPriceFoil(count, sizeProd)
+
+    let productPrice = (((sizeProd * materialProd) + creaseProd) * count) + printProd + foilProd;
+    if(productPrice){
+      let price =  priceCondition(count, productPrice)
+      this.result.textContent = price.toFixed(2)
+    }
+  }
+}
+
+class Notebooks {
+  constructor() {
+    this.theFormProduct11 = document.forms['product-11'];
+    this.innerPrint = new DigitalInnerPrint('product-11', 'product-11-pages-count', 'product-11-pages-black', 'product-11-pages-color', 'product-11-pages-empty')
+    this.print = new DigitalPrint('product-11', 'product-11-print', 'product-11-c1', 'product-11-c2', 'product-11-c3', 'product-11-c4', 'product-11-c5', 'product-11-c6')
+    this.foil = new Foil('product-11', 'product-11-foil', 'product-11-d1', 'product-11-d2', 'product-11-d3', 'product-11-d4')
+
+    this.pages = document.getElementById('product-11-pages-count').addEventListener('change', this.getProduct_Price.bind(this));
+    this.pagesBlack = document.getElementById('product-11-pages-black').addEventListener('change', this.getProduct_Price.bind(this));
+    this.pagesColor = document.getElementById('product-11-pages-color').addEventListener('change', this.getProduct_Price.bind(this));
+    this.pagesEmpty = document.getElementById('product-11-pages-empty').addEventListener('change', this.getProduct_Price.bind(this));
+
+    this.count = document.getElementById('product-11-count').addEventListener('change', this.getProduct_Price.bind(this))
+    this.size = document.getElementById('product-11-size').addEventListener('change', this.getProduct_Price.bind(this))
+    this.material = document.getElementById('product-11-material').addEventListener('change', this.getProduct_Price.bind(this))
+    this.cover = document.getElementById('product-11-cover').addEventListener('change', this.getProduct_Price.bind(this))
+    this.printPrice = document.getElementById('product-11-print').addEventListener('change', this.getProduct_Price.bind(this));
+    this.foilPrice = document.getElementById('product-11-foil').addEventListener('change', this.getProduct_Price.bind(this))
+    this.binding = document.getElementById('product-11-binding').addEventListener('change', this.getProduct_Price.bind(this))
+    this.result = document.querySelector('.product-11-price span')
+    this.getProduct_Price()
+  }
+  getProduct_Count() {
+    let count = parseInt(document.getElementById('product-11-count').value);
+    return count
+  }
+  getProduct_Size() {
+    let selected = this.theFormProduct11.elements['product-11-size'];
+    let price = productSize[selected.value];
+    return price
+  }
+  getProduct_Material() {
+    let selected = this.theFormProduct11.elements['product-11-material'];
+    let price = productMaterial[selected.value];
+    return price
+  }
+  getProduct_Cover() {
+    let selected = this.theFormProduct11.elements['product-11-cover'];
+    let price = productCover[selected.value];
+    return price
+  }
+  getProduct_Binding() {
+    let selected = this.theFormProduct11.elements['product-11-binding'];
+    let price = productBinding[selected.value];
+    return price
+  }
+
+  getProduct_Price() {
+    let count = this.getProduct_Count()
+    let sizeProd = this.getProduct_Size()
+    let materialProd = this.getProduct_Material()
+    let coverMaterial = this.getProduct_Cover()
+    let binding = this.getProduct_Binding()
+    let printCover = this.print.getPricePrint(count, (sizeProd * 2))
+    let foilProd = this.foil.getPriceFoil(count, (sizeProd * 2))
+    let innerPrint = this.innerPrint.getProduct_Price(count, sizeProd, materialProd)
+
+    let productPrice =((((sizeProd * 2) * coverMaterial) + innerPrint + binding) * count) + foilProd + printCover
+    if(productPrice){
+      let price =  priceCondition(count, productPrice)
+      this.result.textContent = price.toFixed(2)
+    }
+  }
+}
+
+class Letterhead {
+  constructor() {
+    this.theFormProduct12 = document.forms['product-12'];
+    this.print = new DigitalPrint('product-12', 'product-12-print', 'product-12-c1', 'product-12-c2', 'product-12-c3', 'product-12-c4', 'product-12-c5')
+    this.count = document.getElementById('product-12-count').addEventListener('change', this.getProduct_Price.bind(this))
+    this.size = document.getElementById('product-12-size').addEventListener('change', this.getProduct_Price.bind(this))
+    this.material = document.getElementById('product-12-material').addEventListener('change', this.getProduct_Price.bind(this))
+    this.printPrice = document.getElementById('product-12-print').addEventListener('change', this.getProduct_Price.bind(this));
+    this.result = document.querySelector('.product-12-price span')
+    this.getProduct_Price()
+    // this.refreshPage()
+  }
+  getProduct_Count() {
+    let count = parseInt(document.getElementById('product-12-count').value);
+    return count
+  }
+  getProduct_Size() {
+    let selected = this.theFormProduct12.elements['product-12-size'];
+    let price = productSize[selected.value];
+    return price
+  }
+  getProduct_Material() {
+    let selected = this.theFormProduct12.elements['product-12-material'];
+    let price = productMaterial[selected.value];
+    return price
+  }
+
+  getProduct_Price() {
+    let count = this.getProduct_Count()
+    let sizeProd = this.getProduct_Size()
+    let materialProd = this.getProduct_Material()
+    let printProd = this.print.getPricePrint(count, sizeProd)
+
+    let productPrice = ((sizeProd * materialProd) * count) + printProd;
+    if(productPrice){
+      let price =  priceCondition(count, productPrice)
+      this.result.textContent = price.toFixed(2)
+    }
+  }
+}
+
+export const calculateDp = () => {
+  const cardProduct = new CardProduct()
+  const envelope = new Envelope()
+  const leafletProduct = new LeafletProduct()
+  const invitation = new Invitation()
+  const brochures = new Brochures()
+  const menu = new Menu()
+  const identifiers = new Identifiers()
+  const calendars = new Calendars()
+  const books = new Books()
+  const folder = new Folder()
+  const notebooks = new Notebooks()
+  const letterhead = new Letterhead()
+}
+
+//BANERY
 function product13_Price() {
-  theFormProduct = document.forms['product-13'];
+  const theFormProduct = document.forms['product-13'];
 
   function getProduct13_Count() {
-    count = parseInt(document.getElementById('product-13-count').value);
+    let count = parseInt(document.getElementById('product-13-count').value);
     document.getElementById('product-13-count').addEventListener('change', product13_Price)
     return count
   }
@@ -1309,11 +1368,12 @@ function product13_Price() {
   return getProduct13_Price()
 }
 
+//SIATTKI
 function product14_Price() {
-  theFormProduct = document.forms['product-14'];
+  const theFormProduct = document.forms['product-14'];
 
   function getProduct14_Count() {
-    count = parseInt(document.getElementById('product-14-count').value);
+    let count = parseInt(document.getElementById('product-14-count').value);
     document.getElementById('product-14-count').addEventListener('change', product14_Price)
     return count
   }
@@ -1380,11 +1440,12 @@ function product14_Price() {
   return getProduct14_Price()
 }
 
+//FOLIA SAMOPRZYLEPNA
 function product15_Price() {
-  theFormProduct = document.forms['product-15'];
+  const theFormProduct = document.forms['product-15'];
 
   function getProduct15_Count() {
-    count = parseInt(document.getElementById('product-15-count').value);
+    let count = parseInt(document.getElementById('product-15-count').value);
     document.getElementById('product-15-count').addEventListener('change', product15_Price)
     return count
   }
@@ -1465,11 +1526,12 @@ function product15_Price() {
   return getProduct15_Price()
 }
 
+//FOTO OBRAZY
 function product16_Price() {
-  theFormProduct = document.forms['product-16'];
+  const theFormProduct = document.forms['product-16'];
 
   function getProduct16_Count() {
-    count = parseInt(document.getElementById('product-16-count').value);
+    let count = parseInt(document.getElementById('product-16-count').value);
     document.getElementById('product-16-count').addEventListener('change', product16_Price)
     return count
   }
@@ -1530,11 +1592,12 @@ function product16_Price() {
   return getProduct16_Price()
 }
 
+//BILBOARDY
 function product17_Price() {
-  theFormProduct = document.forms['product-17'];
+  const theFormProduct = document.forms['product-17'];
 
   function getProduct17_Count() {
-    count = parseInt(document.getElementById('product-17-count').value);
+    let count = parseInt(document.getElementById('product-17-count').value);
     document.getElementById('product-17-count').addEventListener('change', product17_Price);
     return count
   }
@@ -1606,11 +1669,12 @@ function product17_Price() {
   return getProduct17_Price()
 }
 
+//PLAKATY
 function product18_Price() {
-  theFormProduct = document.forms['product-18'];
+  const theFormProduct = document.forms['product-18'];
 
   function getProduct18_Count() {
-    count = parseInt(document.getElementById('product-18-count').value);
+    let count = parseInt(document.getElementById('product-18-count').value);
     document.getElementById('product-18-count').addEventListener('change', product18_Price);
     return count
   }
@@ -1676,11 +1740,12 @@ function product18_Price() {
   return getProduct18_Price()
 }
 
+//CITYLIGHT
 function product19_Price() {
-  theFormProduct = document.forms['product-19'];
+  const theFormProduct = document.forms['product-19'];
 
   function getProduct19_Count() {
-    count = parseInt(document.getElementById('product-19-count').value);
+    let count = parseInt(document.getElementById('product-19-count').value);
     document.getElementById('product-19-count').addEventListener('change', product19_Price);
     return count
   }
@@ -1747,11 +1812,12 @@ function product19_Price() {
   return getProduct19_Price()
 }
 
+//FOTOTAPETY
 function product20_Price() {
-  theFormProduct = document.forms['product-20'];
+  const theFormProduct = document.forms['product-20'];
 
   function getProduct20_Count() {
-    count = parseInt(document.getElementById('product-20-count').value);
+    let count = parseInt(document.getElementById('product-20-count').value);
     document.getElementById('product-20-count').addEventListener('change', product20_Price)
     return count
   }
@@ -1823,11 +1889,12 @@ function product20_Price() {
   return getProduct20_Price()
 }
 
+//TABLICE
 function product21_Price() {
-  theFormProduct = document.forms['product-21'];
+  const theFormProduct = document.forms['product-21'];
 
   function getProduct21_Count() {
-    count = parseInt(document.getElementById('product-21-count').value);
+    let count = parseInt(document.getElementById('product-21-count').value);
     document.getElementById('product-21-count').addEventListener('change', product21_Price)
     return count
   }
@@ -1904,92 +1971,12 @@ function product21_Price() {
   return getProduct21_Price()
 }
 
-// function product22_Price() {
-//   theFormProduct = document.forms['product-22'];
-
-//   function getProduct22_Count() {
-//     count = parseInt(document.getElementById('product-22-count').value);
-//     document.getElementById('product-22-count').addEventListener('change', product22_Price);
-//     return count
-//   }
-
-//   function getProduct22_Size() {
-//     size.selected = theFormProduct.elements['product-22-size'];
-//     size.price = productSize[size.selected.value];
-//     customSize.customDisplay = [...document.querySelectorAll('.product-22-custom-size')];
-//     customSize.countWidth = parseInt(document.getElementById('product-22-custom-width').value);
-//     customSize.countHeight = parseInt(document.getElementById('product-22-custom-height').value);
-//     document.getElementById('product-22-size').addEventListener('change', product22_Price);
-//     document.getElementById('product-22-custom-width').addEventListener('change', product22_Price);
-//     document.getElementById('product-22-custom-height').addEventListener('change', product22_Price);
-
-//     function getCustomSize() {
-
-//       let customPrice = (customSize.countWidth * customSize.countHeight) / 10000 //cm
-//       return customPrice
-//     }
-//     if (size.selected.value === 'product-22-a1') {
-//       customSize.customDisplay.forEach(item => item.style.display = 'block')
-//     } else {
-//       customSize.customDisplay.forEach(item => item.style.display = 'none')
-//     }
-
-//     if (size.selected.value === 'product-22-a1') {
-//       return getCustomSize()
-//     } else {
-//       return size.price
-//     }
-
-//   }
-
-//   function getProduct22_Material() {
-//     material.selected = theFormProduct.elements['product-22-material'];
-//     material.price = productMaterial[material.selected.value];
-//     document.getElementById('product-22-material').addEventListener('change', product22_Price);
-//     return material.price
-//   }
-
-//   function getProduct22_Other() {
-//     other.selected = theFormProduct.elements['product-22-other'];
-//     other.selected = productOther[other.selected.value];
-//     document.getElementById('product-22-other').addEventListener('change', product22_Price);
-//     return other.price
-//   }
-
-//   function getProduct22_Underlay() {
-//     underlay.selected = theFormProduct.elements['product-22-underlay'];
-//     underlay.price = productUnderlay[underlay.selected.value];
-//     document.getElementById('product-22-underlay').addEventListener('change', product22_Price);
-//     return underlay.price
-//   }
-
-//   function getProduct22_Price() {
-//     let productPrice = ((((getProduct22_Size() * getProduct22_Material()) * printingCost.lf) * getProduct22_Count()) +
-//       ((getProduct22_Other() * getProduct22_Size()) * getProduct22_Count()) +
-//       ((getProduct22_Underlay() * getProduct22_Size()) * getProduct22_Count())) * 1.23
-//       let count = getProduct22_Count()
-//       if(count){
-  
-//         if (count >= 5 ) {
-//           productPrice = productPrice + 10
-//           productPrice*= 0.95
-//         }
-//         if (count >= 10 ) {
-//           productPrice = productPrice + 30
-//           productPrice*= 0.93
-//         }
-//       }
-
-//     document.querySelector('.product-22-price span').textContent = productPrice.toFixed(2)
-//   }
-//   return getProduct22_Price()
-// }
-
+//SZYLDY
 function product23_Price() {
-  theFormProduct = document.forms['product-23'];
+  const theFormProduct = document.forms['product-23'];
 
   function getProduct23_Count() {
-    count = parseInt(document.getElementById('product-23-count').value);
+    let count = parseInt(document.getElementById('product-23-count').value);
     document.getElementById('product-23-count').addEventListener('change', product23_Price);
     return count
   }
@@ -2070,11 +2057,12 @@ function product23_Price() {
   return getProduct23_Price()
 }
 
+//SCIANKI REKLAMOWE
 function product24_Price() {
-  theFormProduct = document.forms['product-24'];
+  const theFormProduct = document.forms['product-24'];
 
   function getProduct24_Count() {
-    count = parseInt(document.getElementById('product-24-count').value);
+    let count = parseInt(document.getElementById('product-24-count').value);
     document.getElementById('product-24-count').addEventListener('change', product24_Price);
     return count
   }
@@ -2144,11 +2132,12 @@ function product24_Price() {
   return getProduct24_Price()
 }
 
+//ROLL-UPY
 function product25_Price() {
-  theFormProduct = document.forms['product-25'];
+  const theFormProduct = document.forms['product-25'];
 
   function getProduct25_Count() {
-    count = parseInt(document.getElementById('product-25-count').value);
+    let count = parseInt(document.getElementById('product-25-count').value);
     document.getElementById('product-25-count').addEventListener('change', product25_Price);
     return count
   }
@@ -2216,11 +2205,12 @@ function product25_Price() {
   return getProduct25_Price()
 }
 
+//POTYKACZE
 function product26_Price() {
-  theFormProduct = document.forms['product-26'];
+  const theFormProduct = document.forms['product-26'];
 
   function getProduct26_Count() {
-    count = parseInt(document.getElementById('product-26-count').value);
+    let count = parseInt(document.getElementById('product-26-count').value);
     document.getElementById('product-26-count').addEventListener('change', product26_Price);
     return count
   }
@@ -2268,11 +2258,12 @@ function product26_Price() {
   return getProduct26_Price()
 }
 
+//FLAGI
 function product27_Price() {
-  theFormProduct = document.forms['product-27'];
+  const theFormProduct = document.forms['product-27'];
 
   function getProduct27_Count() {
-    count = parseInt(document.getElementById('product-27-count').value);
+    let count = parseInt(document.getElementById('product-27-count').value);
     document.getElementById('product-27-count').addEventListener('change', product27_Price);
     return count
   }
@@ -2326,11 +2317,12 @@ function product27_Price() {
   return getProduct27_Price()
 }
 
+//WYROBY Z PLEXI
 function product28_Price() {
-  theFormProduct = document.forms['product-28'];
+  const theFormProduct = document.forms['product-28'];
 
   function getProduct28_Count() {
-    count = parseInt(document.getElementById('product-28-count').value);
+    let count = parseInt(document.getElementById('product-28-count').value);
     document.getElementById('product-28-count').addEventListener('change', product28_Price);
     return count
   }
@@ -2409,11 +2401,12 @@ function product28_Price() {
   return getProduct28_Price()
 }
 
+//TABLICZKI GRAWEROWANE
 function product31_Price() {
-  theFormProduct = document.forms['product-31'];
+  const theFormProduct = document.forms['product-31'];
 
   function getProduct31_Count() {
-    count = parseInt(document.getElementById('product-31-count').value);
+    let count = parseInt(document.getElementById('product-31-count').value);
     document.getElementById('product-31-count').addEventListener('change', product31_Price);
     return count
   }
@@ -2482,114 +2475,6 @@ function product31_Price() {
   return getProduct31_Price()
 }
 
-function product32_Price() {
-  theFormProduct = document.forms['product-32'];
-
-  function getProduct32_Count() {
-    count = parseInt(document.getElementById('product-32-count').value);
-    document.getElementById('product-32-count').addEventListener('change', product32_Price)
-    return count
-  }
-
-  function getProduct32_Size() {
-    size.selected = theFormProduct.elements['product-32-size'];
-    size.price = productSize[size.selected.value];
-    customSize.customDisplay = document.querySelector('.product-32-custom-size');
-    customSize.countWidth = parseInt(document.getElementById('product-32-custom-width').value);
-    customSize.countHeight = parseInt(document.getElementById('product-32-custom-height').value);
-    document.getElementById('product-32-size').addEventListener('change', product32_Price)
-    document.getElementById('product-32-custom-width').addEventListener('change', product32_Price)
-    document.getElementById('product-32-custom-height').addEventListener('change', product32_Price)
-
-    function getCustomSize() {
-
-      let customPrice = (customSize.countWidth * customSize.countHeight) /  10000 //cm
-      return customPrice
-    }
-    if (size.selected.value === 'product-32-a1') {
-      customSize.customDisplay.style.display = 'block'
-    } else {
-      customSize.customDisplay.style.display = 'none'
-    }
-
-    if (size.selected.value === 'product-32-a1') {
-      return getCustomSize()
-    } else {
-      return size.price
-    }
-
-  }
-
-  function getProduct32_Material() {
-    material.selected = theFormProduct.elements['product-32-material'];
-    material.price = productMaterial[material.selected.value];
-    document.getElementById('product-32-material').addEventListener('change', product32_Price)
-    return material.price
-  }
-  function getProduct32_Cut() {
-    let cutPrice = 0;
-    const selectedProduct = theFormProduct.elements["product-32-cut-by-contour"];
-    document.getElementById('product-32-cut-by-contour').addEventListener('click', product32_Price)
-    if (selectedProduct.checked == true) {
-      cutPrice = 5;
-    } else {
-      cutPrice = 0;
-    }
-    return cutPrice;
-  }
-  // function getProduct32_Other() {
-  //   other.selected = theFormProduct.elements['product-32-other'];
-  //   other.price = productOther[other.selected.value];
-  //   document.getElementById('product-32-other').addEventListener('change', product32_Price)
-  //   return other.price
-  // }
-
-  // function getProduct15_Cut() {
-  //   let cutPrice = 0;
-  //   const selectedProduct = theFormProduct.elements["product-15-cut-by-contour"];
-  //   document.getElementById('product-15-cut-by-contour').addEventListener('click', product15_Price)
-  //   if (selectedProduct.checked == true) {
-  //     cutPrice = 5;
-  //   } else {
-  //     cutPrice = 0;
-  //   }
-  //   return cutPrice;
-  // }
-
-  function getProduct32_Price() {
-    let productPrice = (((getProduct32_Size() * getProduct32_Material()) * printingCost.lf) * getProduct32_Count())  + 
-    (getProduct32_Size() * getProduct32_Cut()) * getProduct32_Count() * 3.23
-      let count = getProduct32_Count()
-      if(count){
-        if (count >= 1 ) {
-          productPrice = productPrice + 10
-
-        }
-        if (count >= 1 ) {
-          productPrice = productPrice + 30
-          productPrice*= 0.60
-        }
-      }
-    document.querySelector('.product-32-price span').textContent = productPrice.toFixed(2)
-  }
-  return getProduct32_Price()
-}
-
-export const calculateDp = () => {
-    cardPrice();
-    envelopePrice();
-    product3_Price();
-    product4_Price();
-    product5_Price();
-    product6_Price();
-    product7_Price();
-    product8_Price();
-    product9_Price();
-    product10_Price();
-    product11_Price();
-    product12_Price();
-    product32_Price();
-}
 export const calculateLf = () => {
     product13_Price();
     product14_Price();
@@ -2600,7 +2485,6 @@ export const calculateLf = () => {
     product19_Price();
     product20_Price();
     product21_Price();
-    // product22_Price();
     product23_Price();
 }
 

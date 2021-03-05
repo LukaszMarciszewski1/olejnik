@@ -45,7 +45,9 @@ h1 {
   font-size: 2em;
   margin: 0.67em 0;
 }
-
+h3{
+  letter-spacing: 1px;
+}
 /* Grouping content
    ========================================================================== */
 
@@ -79,6 +81,7 @@ pre {
 
 a {
   background-color: transparent;
+  text-decoration: none;
 }
 
 /**
@@ -196,7 +199,7 @@ button:focus,
 button:active{
   outline: none !important;
   box-shadow: none !important;
-  border: none;
+  // border: none;
 }
 /**
  * Correct the inability to style clickable types in iOS and Safari.

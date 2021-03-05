@@ -1,16 +1,44 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-$to      = 'luukaszewski@interia.pl';
-$name    = $_POST['name'];
-$email   = $_POST['email'];
-$subject = 'Nowy e-mail od ' . $name . ' (' . $email . ')';
-$message = $_POST['message'];
+require 'PHPMailer/PHPMailer/src/Exception.php';
+require 'PHPMailer/PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/PHPMailer/src/SMTP.php';
 
-$headers = 'From: ' . $name . ' (' . $email . ')';
-// $headers .= 'Content-Type: text/html; charset=utf-8'. "\r\n";
-$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-$headers .= "Reply-to: ".$email;
+$mail = new PHPMailer;
 
-mail($to, $subject, $message, $headers);
-// header("Location: index.html#contact")
-?>
+// Form Data
+$name = $_REQUEST['name'] ;
+$email = $_REQUEST['email'] ;
+$message = $_REQUEST['message'] ;
+
+$mailbody = 'Zamówienie' . PHP_EOL . PHP_EOL .
+            'Email: ' . $email . '' . PHP_EOL .
+            'Imię: ' . $name . '' . PHP_EOL .
+            'Wiadomość: ' . $message . '' . PHP_EOL ;
+$mail->CharSet = 'UTF-8';
+$mail->isSMTP();                                      // Set mailer to use SMTP
+$mail->Host = 'smtp.olejnik.com.pl'; // Specify main and backup SMTP servers
+$mail->SMTPAuth = true; // Enable SMTP authentication
+$mail->Username = 'studioreklama'; // SMTP username
+$mail->Password = 'zaq123'; // SMTP password
+$mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
+$mail->Port = 587; // TCP port to connect to
+
+$mail->setFrom('studioreklama@olejnik.com.pl'); // Admin ID
+$mail->addAddress('studioreklama@olejnik.com.pl'); // Business Owner ID
+$mail->addReplyTo($email, $name); // Form Submitter's ID
+
+$mail->isHTML(false); // Set email format to HTML
+
+$mail->Subject = 'Olejnik';
+$mail->Body    = $mailbody;
+
+if(!$mail->send()) {
+    echo 'Message could not be sent.';
+    echo 'Mailer Error: ' . $mail->ErrorInfo;
+} else {
+    echo 'Message has been sent';
+}
+

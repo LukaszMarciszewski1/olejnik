@@ -9,11 +9,13 @@ module.exports = {
     mode: 'production',
     entry:{
      index: './src/js/index.js', 
-     subpages: './src/js/pages.js',
+     pages: './src/js/pages.js',
+     products: './src/js/products.js',
      calculateDp: './src/js/modules/calculate-dp.js',
      calculateLf: './src/js/modules/calculate-lf.js',
      calculateEs: './src/js/modules/calculate-es.js',
      calculateSp: './src/js/modules/calculate-sp.js',
+     style: './src/js/style.js',
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -29,7 +31,6 @@ module.exports = {
                     }
                 }
             },
-
             {
                 test: /\.(sass|scss)$/,
                 use: [
@@ -74,7 +75,6 @@ module.exports = {
                 ]
               },
         ],
-
     },
     plugins: [
         new CleanWebpackPlugin(),
@@ -82,31 +82,42 @@ module.exports = {
             filename: 'index.html',
             template: './src/index.html',
             inject: 'body',
-            chunks: ['index'],
+            chunks: ['index', 'style'],
         }),
           new HtmlWebpackPlugin({ 
             filename: 'druk-cyfrowy.html',
             template: './src/template/druk-cyfrowy.html',
             inject: 'body',
-            chunks: ['subpages', 'calculateDp'],
+            chunks: ['pages', 'calculateDp','products', 'style'],
           }),
           new HtmlWebpackPlugin({  
             filename: 'druk-wielkoformatowy.html',
             template: './src/template/druk-wielkoformatowy.html',
             inject: 'body',
-            chunks: ['subpages', 'calculateLf'],
+            chunks: ['pages', 'calculateLf','products', 'style'],
           }),
           new HtmlWebpackPlugin({  
             filename: 'systemy-wystawiennicze.html',
             template: './src/template/systemy-wystawiennicze.html',
             inject: 'body',
-            chunks: ['subpages', 'calculateEs'],
+            chunks: ['pages', 'calculateEs','products', 'style'],
           }),
           new HtmlWebpackPlugin({  
             filename: 'formy-przestrzenne.html',
             template: './src/template/formy-przestrzenne.html',
             inject: 'body',
-            chunks: ['subpages', 'calculateSp'],
+            chunks: ['pages', 'calculateSp','products', 'style'],
+          }),
+          new HtmlWebpackPlugin({  
+            filename: 'druk-etykiet.html',
+            template: './src/template/druk-etykiet.html',
+            inject: 'body',
+            chunks: ['pages', 'style'],
+          }),
+          new HtmlWebpackPlugin({  
+            filename: 'privacy.html',
+            template: './src/template/privacy.html',
+            inject: 'body',
           }),
         new webpack.ProvidePlugin({
             $: 'jquery',
@@ -114,7 +125,8 @@ module.exports = {
             'window.jQuery': 'jquery'
           }),
           new MiniCssExtractPlugin({
-              filename: 'css/[name]-[contenthash].css'
+              filename: 'css/[name].css'
+              
           }),
           new CopyPlugin({
             patterns: [

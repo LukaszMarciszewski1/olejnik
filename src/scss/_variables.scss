@@ -1,27 +1,40 @@
 $black: #000;
 $white: #ffffff;
 $dark:rgb(47, 47, 47);
-$rectangle:#BEEBE9;
-$font-color:#555555;
-$color-gallery: #63b7af;
-$padding-itemGallery:12px;
+$font-color:#555;
+$font-color-light:#777;
 $background-color:#f6f5f5;
-$color-standard: #1a7aa3;
 $color-green: #94c8d6;
 $color-green2: #3b8296;
-$color-standard: #2a6879;
-$color-standard2: #6299aa;
-$color-standard2: #5096ac;
-$light-green:#fafafa;
+$color-standard: #2c788d;
+$color-standard2: #2b798f;
 $background-color2:#d3dbee;
 $icons-bg: #eeedf2;
+$services-gallery-bg:#f5f5f5;
+
+p{
+    letter-spacing: 1px;
+}
 
 @mixin h2-title {
     font-size: 2.5rem;
     display: inline-block;
-    color: rgb(73, 73, 73);
+    color: $font-color;
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
+    line-height: 2.5rem;
+    letter-spacing: 1px;
+}
+@mixin h2-title-responsive{
+    font-size: 1.9rem;
+}
+@mixin h3-title {
+    font-size: 1rem;
+    color: $font-color;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    line-height: 2.2rem;
+    letter-spacing: 1px;
 }
 
 @mixin p-description {
@@ -59,4 +72,14 @@ $icons-bg: #eeedf2;
     background-size: cover;
     background-attachment: fixed;
     width: 100%;
+}
+
+@mixin navShadow{
+    -webkit-box-shadow: 0px 6px 6px -5px rgba(0,0,0,0.5); 
+    box-shadow: 0px 6px 6px -5px rgba(0,0,0,0.5);
+}
+
+@mixin cardShadow{
+    -webkit-box-shadow: -1px 6px 10px -2px rgba(0,0,0,0.15); 
+    box-shadow: -1px 6px 10px -2px rgba(0,0,0,0.15);
 }

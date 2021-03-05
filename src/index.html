@@ -5,30 +5,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Olejnik</title>
+  <meta property="og:url" content="http://www.olejnik.com.pl/">
+  <meta property="og:title"
+    content="Druk wielkoformatowy, offsetowy | Wydruki - Drukarnia Olejnik - Drukarnia cyfrowa Warszawa">
+  <meta property="og:description"
+    content="Drukarnia cyfrowa Olejnik w Warszawie oferuje profesjonalne i szybkie wykonanie druku wielkoformatowego, cyfrowego i offsetowego, banerów, plakatów i bilbordów (jak i innych wydruków).">
+  <meta name="description"
+    content="Drukarnia cyfrowa Olejnik w Warszawie oferuje profesjonalne i szybkie wykonanie druku wielkoformatowego, cyfrowego i offsetowego, banerów, plakatów i bilbordów (jak i innych wydruków).">
+  <meta name="keywords"
+    content="drukarnia cyfrowa Warszawa, druk wielkoformatowy Warszawa, drukarnia offsetowa Warszawa, wydruki Warszawa">
+  <meta name="author" content="Łukasz Marciszewski">
+  <title>Druk wielkoformatowy, offsetowy | Wydruki - Drukarnia Olejnik - Drukarnia cyfrowa Warszawa</title>
 
   <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap&subset=latin-ext"
     rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap&subset=latin-ext"
-    rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.5/css/swiper.min.css'> -->
-
+  <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
+  <script src="https://kit.fontawesome.com/f3ac7ea5a2.js"></script>
 </head>
 
 <body>
-  <header class="header" id="home" style="background-image: url('images/img/balon2.jpg');">
+  <a href="#" class="scroll-up scroll-el"><i class="fas fa-chevron-up"></i></a>
+  <header class="header" id="home">
     <nav class="nav">
-      <a href="#" class="logo"><img src="images/img/logo2.png" alt="">
+      <a href="#home" class="logo scroll-el"><img src="images/img/logo2.png" alt="">
         <h4>Olejnik</h4>
       </a>
       <ul class="nav__list">
-        <li><a href="#home" class="nav__list-item"> Home</a></li>
-        <li><a href="#services" class="nav__list-item nav-settings">Usługi</a></li>
-        <li><a href="#about-us" class="nav__list-item">O firmie</a></li>
-        <li><a href="#gallery" class="nav__list-item">Galeria</a></li>
-        <li><a href="#contact" class="nav__list-item">Kontakt</a></li>
+        <li><a href="#home" class="nav__list-item scroll-el"> Home</a></li>
+        <li><a href="#usługi" class="nav__list-item scroll-el">Usługi</a></li>
+        <li><a href="#o_firmie" class="nav__list-item scroll-el">O firmie</a></li>
+        <li><a href="#galeria" class="nav__list-item scroll-el">Galeria</a></li>
+        <li><a href="#specyfikacja" class="nav__list-item scroll-el">Pliki do druku</a></li>
+        <li><a href="#kontakt" class="nav__list-item scroll-el">Kontakt</a></li>
       </ul>
       <button class="hamburger">
         <span class="hamburger__box">
@@ -36,60 +44,103 @@
         </span>
       </button>
     </nav>
-    <div class="header-content__container">
-      <div class="header-content__title">
-        <h4 class="header-content__h4">Olejnik</h4>
-        <h1 class="header-content__h1">Produkcja reklamowa<br>i poligrafia</h1>
+    <div class="header-slider">
+      <div class="header-slider__container">
+        <div class="header-slider__content">
+          <div class="header-slider__items header-slider__items--active">
+            <div class="header-slider__text">
+              <h2>Katalogi, broszury, foldery</h2>
+              <p>oprawa: szyta, klejona i spiralna</p>
+            </div>
+            <div class="header-slider__image">
+              <img src="images/img/slide3.jpg" alt="" draggable="false">
+            </div>
+          </div>
+
+          <div class="header-slider__items">
+            <div class="header-slider__text">
+              <h2>Kompleksowa realizacja zamówień</h2>
+              <p>od projektu po montaż</p>
+            </div>
+            <div class="header-slider__image">
+              <img src="images/img/slide2.jpg" alt="" draggable="false">
+            </div>
+          </div>
+
+          <div class="header-slider__items">
+            <div class="header-slider__text">
+              <h2>Reklama wielkoformatowa</h2>
+              <p>naklejki, folie, plakaty, banery</p>
+            </div>
+            <div class="header-slider__image">
+              <img src="images/img/slide7.jpg" alt="" draggable="false">
+            </div>
+          </div>
+
+          <div class="header-slider__items">
+            <div class="header-slider__text">
+              <h2>Grawerowanie i&nbspcięcie laserem</h2>
+              <p>wysoka jakość, trwałość i niepowtarzalny design</p>
+            </div>
+            <div class="header-slider__image">
+              <img src="images/img/slide5.jpg" alt="" draggable="false">
+            </div>
+          </div>
+
+          <div class="header-slider__items">
+            <div class="header-slider__text">
+              <h2>Elementy oznakowania wewnętrznego</h2>
+              <p>tabliczki, litery przestrzenne, standy</p>
+            </div>
+            <div class="header-slider__image">
+              <img src="images/img/slide6.jpg" alt="" draggable="false">
+            </div>
+          </div>
+
+        </div>
+        <div class="header-slider__pagination"></div>
       </div>
     </div>
   </header>
 
-  <section class="services" id="services">
-    <div class="service__icon-container">
-      <div class="services__icons">
-        <a href="druk-cyfrowy.html">
-          <div class="services__icons-item a" data-option="digital-print">
-            <div class="icon icon-a">
-              <img src="images/img/pop-a.svg" alt="druk cyfrowy i offsetowy">
-            </div>
-            <div class="services__icons-p">Druk cyfrowy <br> i offsetowy</div>
-          </div>
-        </a>
-        <a href="druk-wielkoformatowy.html">
-          <div class="services__icons-item b" data-option="large-format">
-            <div class="icon icon-b">
-              <img src="images/img/pop-b.svg" alt=" druk wielkoformatowy">
-            </div>
-            <div class="services__icons-p">Druk <br> wielkoformatowy</div>
-          </div>
-        </a>
-        <a href="systemy-wystawiennicze.html">
-          <div class="services__icons-item c" data-option="exhibition-systems">
-            <div class="icon icon-c">
-              <img src="images/img/pop-c.svg" alt="systemy wystawiennicze">
-            </div>
-            <div class="services__icons-p">Systemy <br> wystawiennicze</div>
-          </div>
-        </a>
-        <a href="formy-przestrzenne.html">
-          <div class="services__icons-item d" data-option="spatial-forms">
-            <div class="icon icon-d">
-              <img src="images/img/pop-d.svg" alt="formy przestrzenne">
-            </div>
-            <div class="services__icons-p">Formy <br> przestrzenne</div>
-          </div>
-        </a>
-      </div>
+  <section class="services" id="usługi">
+    <div class="services__icons">
+      <a href="druk-cyfrowy.html">
+        <div class="services__icons-item a" data-option="digital-print">
+          <p class="services__icons-p">Druk cyfrowy <br> i offsetowy</p>
+        </div>
+      </a>
+      <a href="druk-wielkoformatowy.html">
+        <div class="services__icons-item b" data-option="large-format">
+          <p class="services__icons-p">Druk <br> wielkoformatowy</p>
+        </div>
+      </a>
+      <a href="systemy-wystawiennicze.html">
+        <div class="services__icons-item c" data-option="exhibition-systems">
+          <p class="services__icons-p">Systemy <br> wystawiennicze</p>
+        </div>
+      </a>
+      <a href="formy-przestrzenne.html">
+        <div class="services__icons-item d" data-option="spatial-forms">
+          <p class="services__icons-p">Formy <br> przestrzenne</p>
+        </div>
+      </a>
+      <a href="druk-etykiet.html">
+        <div class="services__icons-item e" data-option="labels">
+          <p class="services__icons-p"> Etykiety <br> samoprzylepne</p>
+        </div>
+      </a>
+      <button class="open-panel"><i class="fas fa-chevron-right"></i></button>
     </div>
   </section>
 
-  <section class="services-description">
+  <section class="services-description" id="services-description">
     <div class="services-description__content">
       <div class="services-description__title">
         <h2>Usługi</h2>
       </div>
       <div class="services-description__text">
-        <p data-aos="fade-right" data-aos-delay="100">
+        <p>
           Plakaty, billboardy, citylighty, folie wylewane do oklejania samochodów – te i inne usługi wykonujemy
           ekspresowo i w sposób profesjonalny. Jako specjaliści w zakresie druku cyfrowego dobieramy najlepsze
           rozwiązania w zależności od indywidualnych potrzeb Klienta, uwzględniając charakter, wielkość i czas
@@ -101,23 +152,23 @@
   </section>
 
   <section class="call-to-us" style="background-image: url('images/img/greyscale22.jpg');">
-    <div class="call-to-us__content" >
-      <p><strong>Napisz do nas</strong>, pomożemy Ci znaleźć
+    <div class="call-to-us__content">
+      <p>Pomożemy Ci znaleźć
         idealne rozwiązanie!</p>
-      <a href="#contact" data-aos="zoom-in" data-aos-delay="300"><button class="call-to-us__btn">Napisz do nas</button></a>
+      <a href="#kontakt"><button class="call-to-us__btn call-to-us__btn-scroll">Napisz do nas</button></a>
     </div>
   </section>
 
   <!-- //SLIDE-DEPARTAMENT-------->
   <h2 class="departaments__title-resolution">Z nami zrealizujesz <br> wszystko!</h2>
   <section class="departaments">
-    <div class="swiper-slider">
+    <div class="swiper-slider swiper-slider__container">
       <div class="swiper-slider__wrp swiper-wrapper">
         <div class="swiper-slider__item swiper-slide">
           <div class="swiper-slider__img">
             <img src="images/img/drukarnia.jpg" alt="">
           </div>
-          <div class="swiper-slider__content" >
+          <div class="swiper-slider__content">
             <h2 class="swiper-slider__title">Drukarnia</h2>
             <p class="swiper-slider__text">
               W celu zaspokojenia oczekiwań nawet najbardziej wymagających klientów stworzyliśmy nowoczesny park
@@ -130,7 +181,7 @@
         </div>
         <div class="swiper-slider__item swiper-slide">
           <div class="swiper-slider__img">
-            <img src="images/img/introligatornia.jpeg" alt="">
+            <img src="images/img/introligatornia.jpg" alt="">
           </div>
           <div class="swiper-slider__content">
             <h2 class="swiper-slider__title">Introligatornia</h2>
@@ -173,8 +224,7 @@
 
   <section class="our-features">
     <div class="our-features__container">
-      <div class="our-features__item" data-aos="fade-up"
-      data-aos-delay="100">
+      <div class="our-features__item">
         <i class="fas fa-medal features-icon"></i>
         <h4 class="our-features__title">Jakość</h4>
         <p class="our-features__text">
@@ -182,8 +232,7 @@
           naszej drukarni pełne zadowolenie i pewność wysokiej jakości realizacji.
         </p>
       </div>
-      <div class="our-features__item" data-aos="fade-up"
-      data-aos-delay="200">
+      <div class="our-features__item">
         <i class="fas fa-coins features-icon"></i>
         <h4 class="our-features__title">Cena</h4>
         <p class="our-features__text">
@@ -191,8 +240,7 @@
           oraz nasze wieloletnie doświadczenie umożliwiają nam przygotowanie oferty konkurencyjnej cenowo.
         </p>
       </div>
-      <div class="our-features__item" data-aos="fade-up"
-      data-aos-delay="300">
+      <div class="our-features__item">
         <i class="far fa-calendar-alt features-icon"></i>
         <h4 class="our-features__title">Terminy</h4>
         <p class="our-features__text">
@@ -200,8 +248,7 @@
           w bardzo krótkim terminie.
         </p>
       </div>
-      <div class="our-features__item" data-aos="fade-up"
-      data-aos-delay="400">
+      <div class="our-features__item">
         <i class="fas fa-shuttle-van features-icon"></i>
         <h4 class="our-features__title">Transport</h4>
         <p class="our-features__text">
@@ -212,7 +259,7 @@
     </div>
   </section>
 
-  <section class="gallery" id="gallery">
+  <section class="gallery" id="galeria">
     <div class="gallery-container__slider">
       <h2 class="gallery__title">Galeria</h2>
       <div class="gallery__slider">
@@ -267,83 +314,68 @@
     </div>
   </section>
 
-  <section class="about-us" id="about-us">
-    <div class="about-us__content">
-      <!-- <div class="svg-wrapper">
-        <svg height="100%" width='100%' xmlns="http://www.w3.org/2000/svg">
-          <rect class="shape" height="0" width="0"/>
-        </svg>
-      </div> -->
-      <!-- <div class="rectangle"></div> -->
-      <svg><rect></rect></svg>
-      <h2 class="about-us__title">O firmie</h2>
+  <section class="about-us" id="o_firmie">
       <div class="about-us__text">
-        <p>
-          Firma "Olejnik" w branży reklamowej działa od 1990 roku. Specjalizujemy się w szeroko pojętym druku
-          cyfrowym. Idea naszego biznesu wciąż ewoluuje w kierunku zaspokajania oczekiwań Klientów. Nieustannie
-          modernizowany park maszynowy oraz 20-letnie doświadczenie sprawiają, że oddajemy w Państwa ręce jedną z
-          najnowocześniejszych drukarni cyfrowych w Warszawie.
-        </p>
-        <p>
-          Dbamy o jakość produktów i terminowość ich wykonania. Zadbaliśmy także o to, by jakość, czas, pewność oraz
-          cena pozostały w najlepszych możliwych proporcjach. Satysfakcja naszych Klientów jest dla nas największym
-          priorytetem. Dzięki zaangażowaniu, pasji oraz niezwykłej odpowiedzialności obsługujemy profesjonalnie
-          wszystkich Klientów, nawet tych najbardziej wymagających.
-        </p>
-      </div>
-    </div>
+        <h2 class="about-us__title">O firmie</h2>
+          <p>
+            Firma "Olejnik" w branży reklamowej działa od 1990 roku. Specjalizujemy się w szeroko pojętym druku
+            cyfrowym. Idea naszego biznesu wciąż ewoluuje w kierunku zaspokajania oczekiwań Klientów. Nieustannie
+            modernizowany park maszynowy oraz 20-letnie doświadczenie sprawiają, że oddajemy w Państwa ręce jedną z
+            najnowocześniejszych drukarni cyfrowych w Warszawie.
+          </p>
+          <p>
+            Dbamy o jakość produktów i terminowość ich wykonania. Zadbaliśmy także o to, by jakość, czas, pewność oraz
+            cena pozostały w najlepszych możliwych proporcjach. Satysfakcja naszych Klientów jest dla nas największym
+            priorytetem. Dzięki zaangażowaniu, pasji oraz niezwykłej odpowiedzialności obsługujemy profesjonalnie
+            wszystkich Klientów, nawet tych najbardziej wymagających.
+          </p>
+        </div>
   </section>
 
   <section class="partners">
     <h2 class="partners__title">Zaufali nam</h2>
     <div class="partners__carousel">
       <div class="partners__slide"><img src="images/img/filharmonia.jpg" alt=""></div>
-    <div class="partners__slide"><img src="images/img/legia.jpg" alt=""></div>
-    <div class="partners__slide"><img src="images/img/legia.jpg" alt=""></div>
-    <div class="partners__slide"><img src="images/img/opera.jpg" alt=""></div>
-    <div class="partners__slide"><img src="images/img/pig.jpg" alt=""></div>
-    <div class="partners__slide"><img src="images/img/legia.jpg" alt=""></div>
-    <div class="partners__slide"><img src="images/img/legia.jpg" alt=""></div>
-    <div class="partners__slide"><img src="images/img/opera.jpg" alt=""></div>
-    <div class="partners__slide"><img src="images/img/legia.jpg" alt=""></div>
-    <div class="partners__slide"><img src="images/img/reduta.jpg" alt=""></div>
-    <div class="partners__slide"><img src="images/img/legia.jpg" alt=""></div>
-      <p>DO AKCEPTACJI</p>
+      <div class="partners__slide"><img src="images/img/opera.jpg" alt=""></div>
+      <div class="partners__slide"><img src="images/img/pig.jpg" alt=""></div>
+      <div class="partners__slide"><img src="images/img/CIOP.jpg" alt=""></div>
+      <div class="partners__slide"><img src="images/img/reduta.jpg" alt=""></div>
+      <div class="partners__slide"><img src="images/img/intlort.jpg" alt=""></div>
+      <div class="partners__slide"><img src="images/img/umw.jpg" alt=""></div>
+      <div class="partners__slide"><img src="images/img/mhp.jpg" alt=""></div>
+      <div class="partners__slide"><img src="images/img/mmw.jpg" alt=""></div>
+      <div class="partners__slide"><img src="images/img/lowicka.jpg" alt=""></div>
     </div>
   </section>
 
-  <section class="contact" id="contact">
+  <section class="contact" id="kontakt">
     <div class="contact__top-bar">
       <div class="contact__panel-circle"></div>
       <i class="fas fa-chevron-down contact__panel-arrow"></i>
       <h2 class="contact__title">Kontakt</h2>
     </div>
     <div class="contact__content">
+
       <div class="contact__message">
         <div class="bg-contact2">
           <div class="container-contact2">
             <div class="wrap-contact2">
-
               <form class="contact2-form validate-form" name="contactform" action="contact.php" method="POST">
                 <span class="contact2-form-title">
                   Napisz do nas
                 </span>
-
-                <div class="wrap-input2 validate-input" data-validate="Name is required" >
+                <div class="wrap-input2 validate-input" data-validate="Name is required">
                   <input class="input2" type="text" name="name" id="name" aria-required="true" required>
                   <span class="focus-input2" data-placeholder="IMIĘ"></span>
                 </div>
-
                 <div class="wrap-input2 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                   <input class="input2" type="email" name="email" id="email" aria-required="true" required>
                   <span class="focus-input2" data-placeholder="EMAIL"></span>
                 </div>
-
                 <div class="wrap-input2 validate-input" data-validate="Message is required">
                   <textarea class="input2" name="message" id="message" aria-required="true" required></textarea>
                   <span class="focus-input2" data-placeholder="WIADOMOŚĆ"></span>
                 </div>
-
                 <div class="container-contact2-form-btn actions">
                   <button class="contact2-form-btn special" type="submit" name="submit">
                     Wyślij
@@ -358,90 +390,94 @@
         </div>
       </div>
 
-      <div class="additional-information">
-        <div class="preparation-for-printing">
-          <div class="preparation-for-printing-check additional-information__check">
-            <h4 class="additional-information__h4">Przygotowanie pliku do druku</h4>
-            <button class="additional-information__button preparation-for-printing__button"><i
-                class="fas fa-chevron-down"></i></button>
+      <div class="support__info-wrap support__info-wrap-index" id="specyfikacja">
+        <p class="support__index-title">Specyfikacja techniczna materiałów do druku</p>
+        <div class="support__info-list">
+          <div class="support__info">
+            <div class="support__info-show">
+              <h3 class="support__info-h3">Jak przygotować plik do druku</h3>
+            </div>
+            <div class="support__info-content">
+              <ul>
+                <li>Prosimy o dostarczanie plików w skali 1:1, spłaszczonych (nie dotyczy to plików do druku i
+                  późniejszego
+                  cięcia ploterowego po obrysie), odpowiednio skompresowanych w rozdzielczości minimum 300 ppi przy
+                  wydrukach małoformatowych i od 100 do 150 ppi przy wydrukach wielkoformatowych (przy wydrukach powyżej
+                  15
+                  m2 oglądanych z większej odległości - rozdzielczość powinna być niższa ok. 50 do 72 ppi).</li>
+                <li>Przyjmujemy pliki w formatach PDF, tiff, eps, ai.</li>
+                <li>W plikach do druku grafiki wiekoformatowej proszę fonty
+                  zamienić na krzywe. W innych przypadkach, podzbiór fontów powinien być dołączony do pliku podczas
+                  eksportu
+                  do formatu PDF.</li>
+                <li>W przypadku formatu PDF proszę nie dodawać linii cięcia i innych znaczników, gdyż mogą utrudniać
+                  późniejsze przygotowanie w programie impozycyjnym. Format netto (trim box) powinien być zapisany w
+                  prawidłowo przygotowanym pliku.</li>
+                <li>Grafika dochodząca do krawędzi strony (nie dotyczy druku wielkoformatowego) powinna zawierać spady o
+                  wielkości minimum 3mm (katalogi, broszury i teczki 5mm). Istotne elementy obrazu nie powinny być
+                  umieszczane w odległości mniejszej niż 4-5mm od krawędzi cięcia.</li>
+                <li>Czarny tekst (nie dotyczy dużej grafiki) powinien składać się wyłącznie z koloru czarnego.
+                  Dla zachowania głębokiej czerni należy ją złożyć z czterech barw: C 50%, M 40%, Y40%, K 100%.</li>
+              </ul>
+            </div>
           </div>
-          <div class="preparation-for-printing__content">
-            <p>Prosimy o dostarczanie plików w skali 1:1, spłaszczonych (nie dotyczy to plików do druku i późniejszego
-              cięcia ploterowego po obrysie), odpowiednio skompresowanych w rozdzielczości minimum 300 ppi przy
-              wydrukach małoformatowych i od 100 do 150 ppi przy wydrukach wielkoformatowych (przy wydrukach powyżej 15
-              m2 oglądanych z większej odległości - rozdzielczość powinna być niższa ok. 50 do 72 ppi).
-              Przyjmujemy pliki w formatach PDF, tiff, eps, ai. W plikach do druku grafiki wiekoformatowej proszę fonty
-              zamienić na krzywe. W innych przypadkach, podzbiór fontów powinien być dołączony do pliku podczas eksportu
-              do formatu PDF.
-              W przypadku tego formatu proszę nie dodawać linii cięcia i innych znaczników, gdyż mogą utrudniać
-              późniejsze przygotowanie w programie impozycyjnym. Format netto (trim box) powinien być zapisany w
-              prawidłowo przygotowanym pliku.
-              Grafika dochodząca do krawędzi strony (nie dotyczy druku wielkoformatowego) powinna zawierać spady o
-              wielkości minimum 3mm (katalogi, broszury i teczki 5mm). Istotne elementy obrazu nie powinny być
-              umieszczane w odległości mniejszej niż 4-5mm od krawędzi cięcia.
-              Czarny tekst (nie dotyczy dużej grafiki) powinien składać się wyłącznie z koloru czarnego.
-              Dla zachowania głębokiej czerni należy ją złożyć z czterech barw: C 50%, M 40%, Y40%, K 100%.</p>
-          </div>
-        </div>
-
-        <div class="file-delivery ">
-          <div class="file-delivery-check additional-information__check">
-            <h4 class="additional-information__h4">Przesyłanie plików do druku</h4>
-            <button class="additional-information__button file-delivery__button"><i
-                class="fas fa-chevron-down"></i></button>
-          </div>
-          <div class="file-delivery__content">
-            <p>
-              Pliki można dostarczać osobiście do PRACOWNI REKLAMY mieszczącej się na ul. Górskiej 12, oraz do DRUKARNI
-              znajdującej się w WFDiF przy ul. Chełmskiej 21. <br> <br>
-              <strong>Drogą elektroniczną za pośrednictwem serwera ftp: </strong><br>
-              serwer: <a href="ftp://ftp.olejnik.beep.pl/" target="_blank" class="additional-information__link">
-                ftp.olejnik.beep.pl </a><br>
-              user: klient <br>
-              pas.: r7EBzUyY <br><br>
-              Pliki mniejszej wielkości na skrzynkę mailową: studioreklama@olejnik.com.pl, drukarnia@olejnik.com.pl
-            </p>
+          <div class="support__info">
+            <div class="support__info-show">
+              <h3 class="support__info-h3">Jak przesyłać plik do druku</h3>
+            </div>
+            <div class="support__info-content">
+              <ul>
+                <li>Pliki można dostarczać osobiście do PRACOWNI REKLAMY mieszczącej się na ul. Górskiej 12, oraz do
+                  DRUKARNI
+                  znajdującej się w WFDiF przy ul. Chełmskiej 21.</li>
+                <li>Drogą elektroniczną za pośrednictwem serwera ftp: <br>
+                  serwer: ftp.olejnik.beep.pl<br>
+                  user: klient<br>
+                  pas.: r7EBzUyY
+                </li>
+                <li>Pliki mniejszej wielkości na skrzynkę mailową: studioreklama@olejnik.com.pl,
+                  drukarnia@olejnik.com.pl</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- <div id="map"></div> -->
-  <!-- <iframe src="https://www.google.com/maps/d/embed?mid=1FHS3aeMkowtsAimDaOZPl9Amq_rikstI" width="100%"
-    height="480"></iframe> -->
-
-    <div id="maps">
-      <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11632.605754896922!2d21.033876604444004!3d52.198794517329176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecd2495a336a1%3A0x9eb0c681fc5191f4!2sOlejnik!5e0!3m2!1spl!2spl!4v1591686429213!5m2!1spl!2spl" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-    </div>
-
+  <div id="map-container">
+    <iframe class="map"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11632.605754896922!2d21.033876604444004!3d52.198794517329176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecd2495a336a1%3A0x9eb0c681fc5191f4!2sOlejnik!5e0!3m2!1spl!2spl!4v1591686429213!5m2!1spl!2spl"
+      width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+      tabindex="0"></iframe>
+  </div>
 
   <footer class="footer">
     <div class="footer__inner">
-      <div class="footer__txt adress">
-        <h4 class="txt-title">Olejnik</h4>
-        <p class="txt-p">00-740 Warszawa</p>
-        <p class="txt-p">ul. Górska 12</p>
-        <div class="txt-div"></div>
-        <h4 class="txt-title ">Drukarnia</h4>
-        <p class="txt-p">ul. Chełmska 21 bud. 9</p>
-        <p class="txt-p">teren WFDiF</p>
+      <div class="footer__txt">
+        <h4 class="txt-title">Adres</h4><br>
+        <p class="txt-p">biuro:</p><br>
+        <p class="txt-p">00-740 Warszawa</p><br>
+        <p class="txt-p">ul. Górska 12</p><br>
+        <p class="txt-p txt-p-printer">drukarnia:</p><br>
+        <p class="txt-p">ul. Chełmska 21 bud. 15/17</p><br>
+        <p class="txt-p">teren WFDiF</p><br>
       </div>
       <div class="footer__txt">
-        <h4 class="txt-title">Informacje i zamówienia</h4>
-        <p class="txt-p">tel. +48 22 465 20 51</p>
-        <p class="txt-p">tel. +48 502 057 666</p>
-        <p class="txt-p">tel. +48 502 033 816</p>
+        <h4 class="txt-title">Informacje i&nbspzamówienia</h4><br>
+        <p class="txt-p">tel. +48 22 465 20 51</p><br>
+        <p class="txt-p">tel. +48 502 057 666</p><br>
+        <p class="txt-p">tel. +48 502 033 816</p><br>
         <p class="txt-p"><a href="mailto:biuro@olejnik.com.pl">biuro@olejnik.com.pl</a></p>
       </div>
       <div class="footer__txt">
-        <h4 class="txt-title">Studio graficzne</h4>
-        <p class="txt-p">tel. +48 503 025 334</p>
+        <h4 class="txt-title">Studio graficzne</h4><br>
+        <p class="txt-p">tel. +48 503 025 334</p><br>
         <p class="txt-p"><a href="mailto:studioreklama@olejnik.com.pl">studioreklama@olejnik.com.pl</a></p>
       </div>
       <div class="footer__txt">
-        <h4 class="txt-title">Drukarnia</h4>
-        <p class="txt-p">tel.: +48 515 241 226</p>
+        <h4 class="txt-title">Drukarnia</h4><br>
+        <p class="txt-p">tel.: +48 515 241 226</p><br>
         <p class="txt-p"><a href="mailto:drukarnia@olejnik.com.pl">drukarnia@olejnik.com.pl</a></p>
       </div>
     </div>
@@ -453,45 +489,64 @@
     <div class="copyright">
       <div class="copyright-inside">
         <p> &copy; 2020 Olejnik</p>
-        <a href="#" class="link-privacy">polityka prywatności</a>
+        <a href="privacy.html" class="link-privacy">polityka prywatności</a>
       </div>
     </div>
   </footer>
 
-
-  <script src="https://kit.fontawesome.com/f3ac7ea5a2.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA66CqPzRD0G_UfAVZ94ErzQenZr0aqB1k&callback=initMap"
-    type="text/javascript"></script>
-  <script src="">
-    "https://maps.googleapis.com/maps/api/js"
-  </script>
+  <script>"https://maps.googleapis.com/maps/api/js"</script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+
+  <div id="simplecookienotification_v01"
+    style="display: block; z-index: 99999;padding: 5px; min-height: 30px; width: 100%; position: fixed; background: #2b798f; border: 0px rgb(198, 198, 198); text-align: center; right: 0px; color: rgb(253, 253, 253); bottom: 0px; left: 0px; border-radius: 0px;">
+    <div
+      style="width: 100%; font-size:14px; font-weight:lighter; display: flex; flex-wrap: wrap; align-items: center; justify-content: center;">
+      <p id="simplecookienotification_v01_powiadomienie">Ta strona wykorzystuje do prawidłowego działania pliki cookies.
+        Szczegółowe informacje na ten temat znajdziesz w <a id="simplecookienotification_v01_polityka"
+          href="privacy.html" style="color: rgb(240, 240, 240); margin-right:35px; font-weight:normal">polityce
+          prywatności</a></p>
+      <div id="jwc_hr1" style="height: 10px; display: none;"></div>
+      <a id="okbutton" href="javascript:simplecookienotification_v01_create_cookie('simplecookienotification_v01',1,7);"
+        style="background: rgb(241, 241, 241);margin:5px 15px; color: #2b798f; padding: 10px 20px; text-decoration: none; font-size: 12px; font-weight: normal; border: none; border-radius: 0px; top: 5px; right: 5px;">ROZUMIEM</a>
+    </div>
+    <div id="jwc_hr2" style="height: 10px; display: none;">
+    </div>
+  </div>
   <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'UA-23581568-13');
-  </script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-      AOS.init({
-        duration: 700,
-        once: true
-      });
-    </script>
-    <script>
+    const delayscript = function () {
       const map = document.querySelector('.map')
-          const mapLoad = () => {
-            map.style.display='block'
-          }
-          setTimeout(mapLoad, 1000)
-    </script>
-</body>
+      map.style.display = 'block'
+    };
+    setTimeout(delayscript, 1000);
+  </script>
+  <script type="text/javascript">
+    function simplecookienotification_v01_create_cookie(name, value, days) {
+      if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        var expires = "; expires=" + date.toGMTString();
+      } else var expires = "";
+      document.cookie = name + "=" + value + expires + "; path=/";
+      document.getElementById("simplecookienotification_v01").style.display = "none";
+    }
+    function simplecookienotification_v01_read_cookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+    var simplecookienotification_v01_jest = simplecookienotification_v01_read_cookie("simplecookienotification_v01");
+    if (simplecookienotification_v01_jest == 1) {
+      document.getElementById("simplecookienotification_v01").style.display = "none";
+    }
+  </script>
 
+</body>
 </html>
+
+

@@ -1,59 +1,8 @@
 import $ from 'jquery';
-import '../../scss/style.scss';
+
 
 function contactUs() {
     "use strict";
-    // var name = $('.validate-input input[name="name"]');
-    // var email = $('.validate-input input[name="email"]');
-    // var message = $('.validate-input textarea[name="message"]');
-    /*==================================================================
-    [ Focus Contact2 ]*/
-
-
-    // /*==================================================================
-    // [ Validate ]*/
-
-    // $('.validate-form').on('submit',function(){
-
-    //     var check = true;
-
-    //     if($(name).val().trim() == ''){
-    //         showValidate(name);
-    //         check=false;
-    //     }
-
-    //     if($(email).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
-    //         showValidate(email);
-    //         check=false;
-    //     }
-
-    //     if($(message).val().trim() == ''){
-    //         showValidate(message);
-    //         check=false;
-    //     }
-
-    //     return check;
-    // });
-
-
-    // $('.validate-form .input2').each(function(){
-    //     $(this).focus(function(){
-    //        hideValidate(this);
-    //    });
-    // });
-
-    // function showValidate(input) {
-    //     var thisAlert = $(input).parent();
-
-    //     $(thisAlert).addClass('alert-validate');
-    // }
-
-    // function hideValidate(input) {
-    //     var thisAlert = $(input).parent();
-
-    //     $(thisAlert).removeClass('alert-validate');
-    // }
-
     
     $('.input2').each(function () {
         $(this).on('blur', function () {
@@ -87,24 +36,35 @@ function contactUs() {
         
         $.ajax({
             type: "POST",
+            async: true,
             url: "contact.php",
             data: {
                 name: name,
                 email: email,
                 message: message
             },
+            datatype: 'json',
+            global: false,
             cache: false,
-            success: function (data) {
-                document.querySelector('.mail-status').style.display='block';
-                document.querySelector('.validate-input').style.display='none'
-                return false;
+            beforeSend: function() { 
+                $('#loader').show();
             },
-            error: function(){}
+            success: function(data) {
+                if(data){
+                    document.querySelector('.mail-status').style.display='block';
+                    document.querySelector('.validate-input').style.display='none';
+                } else {
+                    $('.no-config').show()
+                    console.log(data);
+                }
+
+            },
+            complete: function() { 
+                $('#loader').hide();
+            }
         })
         return check;
-
     });
-
 }
 
 export const contact = () => {
