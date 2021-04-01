@@ -29,7 +29,7 @@ function animNav() {
     })
   }
 
-  // show button scroll-up
+  // button scroll-to-up
   function scrollBtnScrollUp(){
     const scrollUp = document.querySelector('.scroll-up');
     window.addEventListener('scroll', () => {
