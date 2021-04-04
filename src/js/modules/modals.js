@@ -1,8 +1,5 @@
 "use strict";
 
-
-//MODAL--------------------------------------------------------->
-
 function modals() {
     const modal = document.querySelector('.modal');
     const contentModal = [...document.querySelectorAll('.content')]

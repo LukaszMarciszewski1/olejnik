@@ -1,13 +1,6 @@
-import {
-  gsap
-} from "gsap";
-import {
-  ScrollTrigger
-} from "gsap/ScrollTrigger";
+import {gsap} from "gsap";
+import {ScrollTrigger} from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
-
-
-
 
 function scrollIndex() {
   const callToUs = document.querySelector('.call-to-us__content p');

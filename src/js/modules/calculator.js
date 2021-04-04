@@ -1,9 +1,4 @@
 "use strict";
-// modifier(productSheets) * ( y * size) = price
-// price / modifier(productSheets) = result => result / size(format(B1 or A1) / A3) = result => result / A3 = modificator(productCover)
-//modifier price sheet material --------->
-// y * size = price --> price / size = y
-
 // koszt arkusza po przeliczeniu z formatów b1 i a1 
 //  modifier * (y * size) = price --------->
 //  price / modifier = x --> x / 5.61167(b1 / a3) = a --> a / 0.12474 = y 

@@ -1,6 +1,5 @@
 import $ from 'jquery';
 
-
 function contactUs() {
     "use strict";
     
