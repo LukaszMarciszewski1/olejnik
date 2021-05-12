@@ -42,6 +42,6 @@
     "jquery": "^3.5.1",
     "slick-carousel": "^1.8.1",
     "slick-lightbox": "^0.2.12",
-    "swiper": "^5.4.3"
+    "swiper": "^6.5.1"
   }
 }
